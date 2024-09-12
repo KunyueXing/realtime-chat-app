@@ -4,3 +4,4 @@
 .eslint-release-info.json
 /test-results.xml
 .temp-eslintcache
+/node_modules
