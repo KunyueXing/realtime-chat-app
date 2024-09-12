@@ -1,9 +1,6 @@
-import { 
-    createTheme,
-    ThemeProvider as MUIThemeProvider,
-} from "@mui/material/styles";
-import { CssBaseline } from "@mui/material";
-import PropTypes from "prop-types";
+import { createTheme, ThemeProvider as MUIThemeProvider } from '@mui/material/styles'
+import { CssBaseline } from '@mui/material'
+import PropTypes from 'prop-types'
 
 /*
   The expected types of the props passed to the ThemeProvider component must be a valid React node. 
@@ -11,20 +8,20 @@ import PropTypes from "prop-types";
   strings, numbers, elements, fragments, or an array of these.
 */
 ThemeProvider.PropTypes = {
-    children: PropTypes.node,
+  children: PropTypes.node
 }
 
 export default function ThemeProvider({ children }) {
-    const themeOptions = useMemo();
+  const themeOptions = useMemo()
 
-    const theme = createTheme(themeOptions);
+  const theme = createTheme(themeOptions)
 
-    return (
-        <StyledEngineProvider injectFirst>
-          <MUIThemeProvider theme={theme}>
-            <CssBaseline />
-            {children}
-          </MUIThemeProvider>
-        </StyledEngineProvider>
-    );
+  return (
+    <StyledEngineProvider injectFirst>
+      <MUIThemeProvider theme={theme}>
+        <CssBaseline />
+        {children}
+      </MUIThemeProvider>
+    </StyledEngineProvider>
+  )
 }

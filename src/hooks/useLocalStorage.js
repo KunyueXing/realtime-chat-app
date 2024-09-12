@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react'
 
 /*
   Defines a custom React hook that synchronizes a state variable with the browser’s localStorage. 
@@ -8,56 +8,55 @@ import { useState, useEffect } from 'react';
 */
 
 function useLocalStorage(key, defaultValue) {
-    const [value, setValue] = useState(() => {
-        // retrieve the item that is stored in the local storage of the browser
-        const storedValue = localStorage.getItem(key);
+  const [value, setValue] = useState(() => {
+    // retrieve the item that is stored in the local storage of the browser
+    const storedValue = localStorage.getItem(key)
 
-        if (storedValue === null) {
-            return defaultValue;
-        }
+    if (storedValue === null) {
+      return defaultValue
+    }
 
-        return JSON.parse(storedValue);
-    });
+    return JSON.parse(storedValue)
+  })
 
-    useEffect(() => {
-        // The event listener checks if the change is happening in localStorage and whether the key 
-        // being changed matches the provided key.
-        const listener = (e) => {
-            if (e.storageArea === localStorage && e.key === key) {
-                setValue(JSON.parse(e.newValue));
-            }
-        };
-        // Adds the storage event listener when the component mounts.
-        window.addEventListener('storage', listener);
+  useEffect(() => {
+    // The event listener checks if the change is happening in localStorage and whether the key
+    // being changed matches the provided key.
+    const listener = (e) => {
+      if (e.storageArea === localStorage && e.key === key) {
+        setValue(JSON.parse(e.newValue))
+      }
+    }
+    // Adds the storage event listener when the component mounts.
+    window.addEventListener('storage', listener)
 
-        // Cleans up the event listener when the component unmounts.
-        return () => {
-            window.removeEventListener('storage', listener);
-        };
+    // Cleans up the event listener when the component unmounts.
+    return () => {
+      window.removeEventListener('storage', listener)
+    }
+  }, [value, key])
 
-    }, [value, key]);
+  // updates both the localStorage value and the state.
+  const setValueInLocalStorage = (newValue) => {
+    setValue((currentValue) => {
+      let result
+      // If newValue is a func. Allows setting state based on the previous state, which is important
+      // for cases like counters or toggles.
+      if (typeof newValue === 'function') {
+        result = newValue(currentValue)
+      } else {
+        result = newValue
+      }
 
-    // updates both the localStorage value and the state.
-    const setValueInLocalStorage = (newValue) => {
-        setValue((currentValue) => {
-            let result;
-            // If newValue is a func. Allows setting state based on the previous state, which is important 
-            // for cases like counters or toggles.
-            if (typeof newValue === 'function') {
-                result = newValue(currentValue);
-            } else {
-                result = newValue;
-            }
+      localStorage.setItem(key, JSON.stringify(result))
 
-            localStorage.setItem(key, JSON.stringify(result));
+      return result
+    })
+  }
 
-            return result;
-        });
-    };
-
-    // value: The current state synchronized with localStorage.
-    // setValueInLocalStorage: The function to update the state and localStorage simultaneously.
-    return [value, setValueInLocalStorage];
+  // value: The current state synchronized with localStorage.
+  // setValueInLocalStorage: The function to update the state and localStorage simultaneously.
+  return [value, setValueInLocalStorage]
 }
 
-export default useLocalStorage;
+export default useLocalStorage

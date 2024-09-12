@@ -1,0 +1,6 @@
+/build/**
+/coverage/**
+/mode_modules/**
+/tmp/**
+test.js
+!.eslintrc.js
