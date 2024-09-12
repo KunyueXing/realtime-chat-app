@@ -1,1 +1,6 @@
 .DS_Store
+.cache
+.eslintcache
+.eslint-release-info.json
+/test-results.xml
+.temp-eslintcache
