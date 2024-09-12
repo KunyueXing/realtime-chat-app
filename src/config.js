@@ -29,3 +29,12 @@ export const langOptions = [
 
 // the default language is English
 export const defaultLang = langOptions[0];
+
+export const defaultSettings = {
+    themeMode: "light",
+    themeDirection: "ltr",
+    themeContrast: "default",
+    themeLayout: "horizontal",
+    themeColorPresets: "default",
+    themeStretch: false,
+};
