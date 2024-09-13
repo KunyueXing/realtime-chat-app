@@ -1,4 +1,4 @@
-import { enUS, zhCN, frFR, esES, arSD } from '@mui/material/locale';
+import { enUS, zhCN, frFR, esES, arSD } from '@mui/material/locale'
 
 export const langOptions = [
   {
@@ -31,10 +31,10 @@ export const langOptions = [
     systemValue: arSD,
     icon: '/assets/icons/flags/ic_flag_sa.svg',
   },
-];
+]
 
 // the default language is English
-export const defaultLang = langOptions[0];
+export const defaultLang = langOptions[0]
 
 export const defaultSettings = {
   themeMode: "light",
@@ -43,4 +43,4 @@ export const defaultSettings = {
   themeLayout: "horizontal",
   themeColorPresets: "default",
   themeStretch: false,
-};
+}
