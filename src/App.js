@@ -1,8 +1,16 @@
+// routes
+import Router from './routes'
+// theme
+import ThemeProvider from './theme'
+// components
+
+
 function App() {
   return (
-    <div className='app'>
-      app
-    </div>
+    <ThemeProvider>
+      {" "}
+      <Router />{" "}
+    </ThemeProvider>
   )
 }
 
