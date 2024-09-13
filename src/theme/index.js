@@ -1,9 +1,5 @@
 // @MUI
-import {
-  createTheme,
-  ThemeProvider as MUIThemeProvider,
-  StyledEngineProvider
-} from '@mui/material/styles'
+import { createTheme, ThemeProvider as MUIThemeProvider, StyledEngineProvider } from '@mui/material/styles'
 import { CssBaseline } from '@mui/material'
 
 import PropTypes from 'prop-types'
@@ -26,7 +22,7 @@ ThemeProvider.PropTypes = {
 }
 
 export default function ThemeProvider({ children }) {
-  const { themeMode, themeDirection } = useSettings();
+  const { themeMode, themeDirection } = useSettings()
 
   const isLight = themeMode === 'light'
 
@@ -38,7 +34,7 @@ export default function ThemeProvider({ children }) {
       shape: { borderRadius: 8 },
       direction: themeDirection,
       shadows: isLight ? shadows.light : shadows.dark,
-      customShadows: isLight ? customShadows.light : customShadows.dark,
+      customShadows: isLight ? customShadows.light : customShadows.dark
     }),
     [isLight, themeDirection]
   )
