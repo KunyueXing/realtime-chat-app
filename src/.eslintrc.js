@@ -16,12 +16,16 @@ module.exports = {
       jsx: true
     }
   },
-  // Automatically detects the version of React you are using. This helps the React-specific ESLint 
+  // Automatically detects the version of React you are using. This helps the React-specific ESLint
   // rules to function correctly.
   settings: {
     react: {
       version: 'detect'
     }
+  },
+  rules: {
+    'react/react-in-jsx-scope': 'off', // Turn off this rule for React 17+
+    'react/jsx-uses-react': 'off'
   },
   /*
     Defines the environments the code is expected to run in, enabling the appropriate global variables.

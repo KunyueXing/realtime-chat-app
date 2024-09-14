@@ -5,7 +5,6 @@ import { BrowserRouter } from 'react-router-dom'
 import { HelmetProvider } from 'react-helmet-async'
 import SettingsProvider from './contexts/Settingscontext'
 
-
 const root = ReactDOM.createRoot(document.getElementById('root'))
 
 /*
