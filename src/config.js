@@ -1,4 +1,5 @@
 import { enUS, zhCN, frFR, esES, arSD } from '@mui/material/locale'
+import { PATH_DASHBOARD } from './routes/paths'
 
 export const langOptions = [
   {

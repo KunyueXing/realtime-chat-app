@@ -5,6 +5,7 @@ import DashboardLayout from '../layouts/dashboard'
 // config
 import LoadingScreen from '../components/LoadingScreen'
 import { DEFAULT_PATH } from '../config'
+import React from 'react'
 
 const Loadable = (Component) => (props) => {
   return (

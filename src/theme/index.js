@@ -4,6 +4,7 @@ import { CssBaseline } from '@mui/material'
 
 import PropTypes from 'prop-types'
 import { useMemo } from 'react'
+import React from 'react'
 // hooks
 import useSettings from '../hooks/useSettings'
 // customized palette, typography, ...
@@ -17,7 +18,7 @@ import shadows, { customShadows } from './shadows'
   PropTypes.node is a data type in the prop-types library that can be anything renderable by React: 
   strings, numbers, elements, fragments, or an array of these.
 */
-ThemeProvider.PropTypes = {
+ThemeProvider.propTypes = {
   children: PropTypes.node
 }
 

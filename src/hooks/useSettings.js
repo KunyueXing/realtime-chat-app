@@ -1,5 +1,5 @@
 import { useContext } from 'react'
-import { SettingsContext } from '../contexts/Settingscontext'
+import { SettingsContext } from '../contexts/SettingContext'
 
 // ----------------------------------------------------------------------
 

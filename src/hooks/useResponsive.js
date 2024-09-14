@@ -39,8 +39,6 @@ function useResponsive(query, key, start, end) {
     default:
       return null
   }
-
-  return null
 }
 
 export default useResponsive

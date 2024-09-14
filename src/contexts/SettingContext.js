@@ -2,6 +2,8 @@ import { createContext, useEffect } from 'react'
 import { defaultSettings } from '../config'
 import useLocalStorage from '../hooks/useLocalStorage'
 import getColorPresets, { defaultPreset, colorPresets } from '../utils/getColorPresets'
+import React from 'react'
+import PropTypes from 'prop-types'
 
 const initialState = {
   ...defaultSettings,
@@ -203,6 +205,10 @@ const SettingsProvider = ({ children }) => {
       {children}
     </SettingsContext.Provider>
   )
+}
+
+SettingsProvider.propTypes = {
+  children: PropTypes.node.isRequired
 }
 
 export { SettingsContext }
