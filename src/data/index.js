@@ -23,7 +23,4 @@ const Nav_Settings = [
   }
 ]
 
-export {
-  Nav_Buttons,
-  Nav_Settings
-}
+export { Nav_Buttons, Nav_Settings }
