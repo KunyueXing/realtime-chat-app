@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { Box, Stack, Divider, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
-import { Nav_Buttons } from '../../data'
+import { Nav_Buttons, Nav_Settings } from '../../data'
 
 const DashboardLayout = () => {
   const theme = useTheme()
@@ -41,6 +41,10 @@ const DashboardLayout = () => {
             </Box>
             <Stack sx={{ width: 'auto', alignItems: 'center' }} direction='column' spacing={3}>
               {Nav_Buttons.map((ele) => (
+                <IconButton key={ele.index}>{ele.icon}</IconButton>
+              ))}
+              <Divider sx={{ width: 48 }} />
+              {Nav_Settings.map((ele) => (
                 <IconButton key={ele.index}>{ele.icon}</IconButton>
               ))}
             </Stack>

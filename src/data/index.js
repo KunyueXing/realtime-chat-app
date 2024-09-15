@@ -1,4 +1,4 @@
-import { WechatLogo, Users, Phone } from '@phosphor-icons/react'
+import { WechatLogo, Users, Phone, GearSix } from '@phosphor-icons/react'
 import React from 'react'
 
 const Nav_Buttons = [
@@ -16,4 +16,14 @@ const Nav_Buttons = [
   }
 ]
 
-export { Nav_Buttons }
+const Nav_Settings = [
+  {
+    index: 3,
+    icon: <GearSix />
+  }
+]
+
+export {
+  Nav_Buttons,
+  Nav_Settings
+}
