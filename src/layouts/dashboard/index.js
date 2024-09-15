@@ -4,6 +4,7 @@ import { Box, Stack, Divider, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'
+import { useSelector } from 'react-redux'
 
 const DashboardLayout = () => {
   const theme = useTheme()
