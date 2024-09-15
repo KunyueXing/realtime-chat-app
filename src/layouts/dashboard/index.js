@@ -3,6 +3,7 @@ import { Outlet } from 'react-router-dom'
 import { Box, Stack, Divider, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
+import { Nav_Buttons } from '../../data'
 
 const DashboardLayout = () => {
   const theme = useTheme()
@@ -10,7 +11,6 @@ const DashboardLayout = () => {
   return (
     <>
       <Box
-        p={2}
         sx={{
           bgcolor: theme.palette.background.paper,
           boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)',
@@ -18,26 +18,33 @@ const DashboardLayout = () => {
           width: 100
         }}
       >
-        <Stack direction='column' sx={{ width: '100%', alignItems: 'center' }} spacing={4}>
-          <Box
-            sx={{
-              bgcolor: theme.palette.primary.main,
-              height: 64,
-              width: 64,
-              borderRadius: 1.5
-            }}
-            p={1}
-          >
-            <img
-              src={Logo}
-              alt={'Chat app logo'}
-              style={{
-                width: '100%',
-                height: '100%',
-                objectFit: 'contain' // Ensures the image fits within the box while maintaining its aspect ratio
+        <Stack py={3} sx={{ height: '100%', alignItems: 'center', justifyContent: 'space-between' }}>
+          <Stack direction='column' sx={{ width: '100%', alignItems: 'center' }} spacing={4}>
+            <Box
+              sx={{
+                bgcolor: theme.palette.primary.main,
+                height: 64,
+                width: 64,
+                borderRadius: 1.5
               }}
-            />
-          </Box>
+              p={1}
+            >
+              <img
+                src={Logo}
+                alt={'Chat app logo'}
+                style={{
+                  width: '100%',
+                  height: '100%',
+                  objectFit: 'contain' // Ensures the image fits within the box while maintaining its aspect ratio
+                }}
+              />
+            </Box>
+            <Stack sx={{ width: 'auto', alignItems: 'center' }} direction='column' spacing={3}>
+              {Nav_Buttons.map((ele) => (
+                <IconButton key={ele.index}>{ele.icon}</IconButton>
+              ))}
+            </Stack>
+          </Stack>
         </Stack>
       </Box>
       <Outlet />
