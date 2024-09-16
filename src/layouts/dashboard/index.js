@@ -8,6 +8,8 @@ import { useSelector, useDispatch } from 'react-redux'
 import { UpdateTab } from '../../redux/slices/app'
 import { useNavigate } from 'react-router-dom'
 import { faker } from '@faker-js/faker'
+import MuiSwitch from '../../components/MuiSwitch'
+import useSettings from '../../hooks/useSettings'
 
 const getPath = (index) => {
   switch (index) {
@@ -39,6 +41,8 @@ const DashboardLayout = () => {
     dispatch(UpdateTab({ tab: index }))
     navigate(getPath(index))
   }
+
+  const { onToggleMode } = useSettings()
 
   return (
     <>
@@ -121,7 +125,8 @@ const DashboardLayout = () => {
               })}
             </Stack>
           </Stack>
-          <Stack spacing={4}>
+          <Stack spacing={4} sx={{ alignItems: 'center' }}>
+            <MuiSwitch defaultChecked={theme.palette.mode === 'dark'} onChange={onToggleMode} />
             {/* Use faker to generate an random image as avatar example */}
             <Avatar src={faker.image.avatar()} />
           </Stack>
