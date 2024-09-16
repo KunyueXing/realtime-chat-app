@@ -1,6 +1,7 @@
 import { useDispatch as useAppDispatch, useSelector as useAppDispatch } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
+import { rootPersistConfig, rootReducer } from './rootReducer'
 
 /*
   For a simplified store configuration. Used built-in middleware. 
@@ -16,9 +17,14 @@ import { persistStore, persistReducer } from 'redux-persist'
   When a non-serializable value is detected, a console error will be printed with the key path for where the 
   non-serializable value was detected. 
   This check ensures that state and actions are serializable (important for debugging).
+
+  reducer: The root reducer is wrapped with persistReducer, enabling persistence based on rootPersistConfig. 
+  This means the state managed by rootReducer will be persisted.
+  rootPersistConfig contains the settings for persistence;
+  rootReducer is the main reducer that combines all the other reducers in the app;
 */
 const store = configureStore({
-  // placeholder: root reducer
+  reducer: persistReducer(rootPersistConfig, rootReducer),
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
