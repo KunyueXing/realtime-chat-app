@@ -1,12 +1,13 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Box, Stack, Divider, IconButton, Icon } from '@mui/material'
+import { Box, Stack, Divider, IconButton, Icon, Avatar } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'
 import { useSelector, useDispatch } from 'react-redux'
 import { UpdateTab } from '../../redux/slices/app'
 import { useNavigate } from 'react-router-dom'
+import { faker } from '@faker-js/faker'
 
 const getPath = (index) => {
   switch (index) {
@@ -119,6 +120,10 @@ const DashboardLayout = () => {
                 )
               })}
             </Stack>
+          </Stack>
+          <Stack spacing={4}>
+            {/* Use faker to generate an random image as avatar example */}
+            <Avatar src={faker.image.avatar()} />
           </Stack>
         </Stack>
       </Box>
