@@ -1,6 +1,6 @@
 import React from 'react'
 import { Outlet } from 'react-router-dom'
-import { Box, Stack, Divider, IconButton } from '@mui/material'
+import { Box, Stack, Divider, IconButton, Icon } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'
@@ -72,14 +72,13 @@ const DashboardLayout = () => {
             </Box>
             <Stack sx={{ width: 'auto', alignItems: 'center' }} direction='column' spacing={3}>
               {Nav_Buttons.map((ele) => {
-                // <IconButton key={ele.index}>{ele.icon}</IconButton>
                 return ele.index == selectedTab ? (
                   <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1}>
                     <IconButton
                       onClick={() => {
                         handleChangeTab(ele.index)
                       }}
-                      sx={{ width: 'auto', color: '#fff' }}
+                      sx={{ width: 'auto', color: '#ffffff' }}
                     >
                       {ele.icon}
                     </IconButton>
@@ -96,9 +95,29 @@ const DashboardLayout = () => {
                 )
               })}
               <Divider sx={{ width: 48 }} />
-              {Nav_Settings.map((ele) => (
-                <IconButton key={ele.index}>{ele.icon}</IconButton>
-              ))}
+              {Nav_Settings.map((ele) => {
+                return ele.index == selectedTab ? (
+                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1}>
+                    <IconButton
+                      onClick={() => {
+                        handleChangeTab(ele.index)
+                      }}
+                      sx={{ width: 'auto', color: '#ffffff' }}
+                    >
+                      {ele.icon}
+                    </IconButton>
+                  </Box>
+                ) : (
+                  <IconButton
+                    onClick={() => {
+                      handleChangeTab(ele.index)
+                    }}
+                    sx={{ width: 'auto', color: '#000' }}
+                  >
+                    {ele.icon}
+                  </IconButton>
+                )
+              })}
             </Stack>
           </Stack>
         </Stack>
