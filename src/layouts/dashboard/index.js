@@ -4,10 +4,40 @@ import { Box, Stack, Divider, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'
-import { useSelector } from 'react-redux'
+import { useSelector, useDispatch } from 'react-redux'
+import { UpdateTab } from '../../redux/slices/app'
+import { useNavigate } from 'react-router-dom'
+
+const getPath = (index) => {
+  switch (index) {
+    case 0:
+      return '/app'
+    case 1:
+      return '/group'
+    case 2:
+      return '/call'
+    case 3:
+      return '/settings'
+    default:
+      break
+  }
+}
 
 const DashboardLayout = () => {
   const theme = useTheme()
+
+  const { tab } = useSelector((state) => state.app)
+
+  const selectedTab = tab
+
+  const navigate = useNavigate()
+
+  const dispatch = useDispatch()
+
+  const handleChangeTab = (index) => {
+    dispatch(UpdateTab({ tab: index }))
+    navigate(getPath(index))
+  }
 
   return (
     <>
@@ -41,9 +71,30 @@ const DashboardLayout = () => {
               />
             </Box>
             <Stack sx={{ width: 'auto', alignItems: 'center' }} direction='column' spacing={3}>
-              {Nav_Buttons.map((ele) => (
-                <IconButton key={ele.index}>{ele.icon}</IconButton>
-              ))}
+              {Nav_Buttons.map((ele) => {
+                // <IconButton key={ele.index}>{ele.icon}</IconButton>
+                return ele.index == selectedTab ? (
+                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1}>
+                    <IconButton
+                      onClick={() => {
+                        handleChangeTab(ele.index)
+                      }}
+                      sx={{ width: 'auto', color: '#fff' }}
+                    >
+                      {ele.icon}
+                    </IconButton>
+                  </Box>
+                ) : (
+                  <IconButton
+                    onClick={() => {
+                      handleChangeTab(ele.index)
+                    }}
+                    sx={{ width: 'auto', color: '#000' }}
+                  >
+                    {ele.icon}
+                  </IconButton>
+                )
+              })}
               <Divider sx={{ width: 48 }} />
               {Nav_Settings.map((ele) => (
                 <IconButton key={ele.index}>{ele.icon}</IconButton>

@@ -1,17 +1,17 @@
-import { createSlice } from "@reduxjs/toolkit"
+import { createSlice } from '@reduxjs/toolkit'
 
 const initialState = {
   user: {},
   sideBar: {
     open: false,
-    type: "CONTACT", // can be CONTACT, STARRED, SHARED
+    type: 'CONTACT' // can be CONTACT, STARRED, SHARED
   },
   isLoggedIn: true,
   tab: 0, // [0, 1, 2, 3] refers to navigation bar - chats, people, phone, and settings
   snackbar: {
     open: null,
     severity: null,
-    message: null,
+    message: null
   },
   users: [], // all users of app who are not friends and not requested yet
   all_users: [],

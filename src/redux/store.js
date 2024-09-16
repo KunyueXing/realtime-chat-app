@@ -1,4 +1,4 @@
-import { useDispatch as useAppDispatch, useSelector as useAppDispatch } from 'react-redux'
+import { useDispatch as useAppDispatch, useSelector as useAppSelector } from 'react-redux'
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import { rootPersistConfig, rootReducer } from './rootReducer'
