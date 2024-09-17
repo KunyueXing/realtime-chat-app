@@ -78,7 +78,7 @@ const DashboardLayout = () => {
             <Stack sx={{ width: 'auto', alignItems: 'center' }} direction='column' spacing={3}>
               {Nav_Buttons.map((ele) => {
                 return ele.index == selectedTab ? (
-                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1}>
+                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1} key={`button-${ele.index}`}>
                     <IconButton
                       onClick={() => {
                         handleChangeTab(ele.index)
@@ -90,6 +90,7 @@ const DashboardLayout = () => {
                   </Box>
                 ) : (
                   <IconButton
+                    key={`button-${ele.index}`}
                     onClick={() => {
                       handleChangeTab(ele.index)
                     }}
@@ -105,7 +106,7 @@ const DashboardLayout = () => {
               <Divider sx={{ width: 48 }} />
               {Nav_Settings.map((ele) => {
                 return ele.index == selectedTab ? (
-                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1}>
+                  <Box sx={{ bgcolor: theme.palette.primary.main, borderRadius: 1.5 }} p={1} key={`setting-${ele.index}`}>
                     <IconButton
                       onClick={() => {
                         handleChangeTab(ele.index)
@@ -117,6 +118,7 @@ const DashboardLayout = () => {
                   </Box>
                 ) : (
                   <IconButton
+                    key={`setting-${ele.index}`}
                     onClick={() => {
                       handleChangeTab(ele.index)
                     }}
