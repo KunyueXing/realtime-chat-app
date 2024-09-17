@@ -93,7 +93,10 @@ const DashboardLayout = () => {
                     onClick={() => {
                       handleChangeTab(ele.index)
                     }}
-                    sx={{ width: 'auto', color: '#000' }}
+                    sx={{
+                      width: 'auto',
+                      color: theme.palette.mode === 'light' ? '#080707' : theme.palette.text.primary
+                    }}
                   >
                     {ele.icon}
                   </IconButton>
@@ -117,7 +120,10 @@ const DashboardLayout = () => {
                     onClick={() => {
                       handleChangeTab(ele.index)
                     }}
-                    sx={{ width: 'auto', color: '#000' }}
+                    sx={{
+                      width: 'auto',
+                      color: theme.palette.mode === 'light' ? '#080707' : theme.palette.text.primary
+                    }}
                   >
                     {ele.icon}
                   </IconButton>
