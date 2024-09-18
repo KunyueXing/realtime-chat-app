@@ -1,8 +1,9 @@
 import React from 'react'
-import { Box, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { Circle, Users, MagnifyingGlass } from 'phosphor-react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
 import { useTheme } from '@mui/material/styles'
+import { SimpleBarStyle } from '../../components/Scrollbar'
 
 const Chats = () => {
   const theme = useTheme()
@@ -36,6 +37,16 @@ const Chats = () => {
             </SearchIconWrapper>
             <StyledInputBase placeholder='Search...' inputProps={{ 'aria-label': 'search' }} />
           </Search>
+        </Stack>
+        <Divider />
+        <Stack sx={{ flexGrow: 1, overflow: 'scroll', height: '100%' }}>
+          <SimpleBarStyle timeout={500} clickOnTrack={false}>
+            <Stack>
+              <Typography variant='subtitle2' sx={{ color: '#676667' }}>
+                All Chats
+              </Typography>
+            </Stack>
+          </SimpleBarStyle>
         </Stack>
       </Stack>
     </Box>
