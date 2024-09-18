@@ -5,6 +5,7 @@ import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Sea
 import { useTheme } from '@mui/material/styles'
 import { SimpleBarStyle } from '../../components/Scrollbar'
 import ChatElement from '../../components/ChatElement'
+import { ChatList } from '../../data'
 
 const Chats = () => {
   const theme = useTheme()
@@ -47,11 +48,17 @@ const Chats = () => {
                 <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                   Pinned
                 </Typography>
-                <ChatElement />
+                {/* <ChatElement /> */}
+                {ChatList.filter((ele) => ele.pinned).map((ele) => {
+                  return <ChatElement {...ele} />
+                })}
                 <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                   All Chats
                 </Typography>
-                <ChatElement />
+                {/* <ChatElement /> */}
+                {ChatList.filter((ele) => !ele.pinned).map((ele) => {
+                  return <ChatElement {...ele} />
+                })}
               </Stack>
             </SimpleBarStyle>
           </Stack>

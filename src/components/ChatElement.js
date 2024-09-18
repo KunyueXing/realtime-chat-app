@@ -43,24 +43,24 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
   }
 }))
 
-const ChatElement = () => {
+const ChatElement = ({ img, name, msg, time, unread, id }) => {
   return (
     <StyledChatBox sx={{ width: '100%', borderRadius: 1, bgcolor: '#fff' }} p={2}>
       <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <Stack direction='row' spacing={2}>
           <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
-            <Avatar src={faker.image.avatar()} />
+            <Avatar src={img} alt={name} />
           </StyledBadge>
           <Stack spacing={0.3}>
-            <Typography variant='subtitle2'>nameplaceholder</Typography>
-            <Typography variant='caption'>truncateTextplaceholder</Typography>
+            <Typography variant='subtitle2'>{name}</Typography>
+            <Typography variant='caption'>{truncateText(msg, 20)}</Typography>
           </Stack>
         </Stack>
         <Stack spacing={2} sx={{ alignItems: 'center' }}>
           <Typography sx={{ fontWeight: 600 }} variant='caption'>
-            time
+            {time}
           </Typography>
-          <Badge color='primary' badgeContent={2} />
+          <Badge color='primary' badgeContent={unread} />
         </Stack>
       </Stack>
     </StyledChatBox>
