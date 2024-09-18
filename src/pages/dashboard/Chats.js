@@ -1,8 +1,12 @@
 import React from 'react'
 import { Box, IconButton, Stack, Typography } from '@mui/material'
-import { Circle, Users } from 'phosphor-react'
+import { Circle, Users, MagnifyingGlass } from 'phosphor-react'
+import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
+import { useTheme } from '@mui/material/styles'
 
 const Chats = () => {
+  const theme = useTheme()
+
   return (
     <Box
       sx={{
@@ -24,6 +28,14 @@ const Chats = () => {
               <Circle />
             </IconButton>
           </Stack>
+        </Stack>
+        <Stack sx={{ width: '100%' }}>
+          <Search>
+            <SearchIconWrapper>
+              <MagnifyingGlass color={theme.palette.primary.main} />
+            </SearchIconWrapper>
+            <StyledInputBase placeholder='Search...' inputProps={{ 'aria-label': 'search' }} />
+          </Search>
         </Stack>
       </Stack>
     </Box>
