@@ -44,8 +44,10 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
 }))
 
 const ChatElement = ({ img, name, msg, time, unread, id }) => {
+  const theme = useTheme()
+
   return (
-    <StyledChatBox sx={{ width: '100%', borderRadius: 1, bgcolor: '#fff' }} p={2}>
+    <StyledChatBox sx={{ width: '100%', borderRadius: 1, bgcolor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default }} p={2}>
       <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <Stack direction='row' spacing={2}>
           <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
