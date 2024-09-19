@@ -1,7 +1,8 @@
 import React from 'react'
-import { Box, Stack, Avatar } from '@mui/material'
+import { Box, Stack, Avatar, Typography, IconButton, Divider } from '@mui/material'
 import StyledBadge from '../StyledBadge'
 import { faker } from '@faker-js/faker'
+import { VideoCamera, Phone, MagnifyingGlass, CaretCircleDown } from 'phosphor-react'
 
 const ChatHeader = () => {
   return (
@@ -30,6 +31,24 @@ const ChatHeader = () => {
                 <Avatar src={faker.image.avatar()} />
               </StyledBadge>
             </Box>
+            <Stack spacing={0.2}>
+              <Typography variant='subtitle2'>nameplaceholder</Typography>
+            </Stack>
+          </Stack>
+          <Stack direction='row' spacing={3} sx={{ alignItems: 'center' }}>
+            <IconButton>
+              <VideoCamera />
+            </IconButton>
+            <IconButton>
+              <Phone />
+            </IconButton>
+            <IconButton>
+              <MagnifyingGlass />
+            </IconButton>
+            <Divider orientation='vertical' flexItem />
+            <IconButton>
+              <CaretCircleDown />
+            </IconButton>
           </Stack>
         </Stack>
       </Box>
