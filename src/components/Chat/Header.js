@@ -3,8 +3,11 @@ import { Box, Stack, Avatar, Typography, IconButton, Divider } from '@mui/materi
 import StyledBadge from '../StyledBadge'
 import { faker } from '@faker-js/faker'
 import { VideoCamera, Phone, MagnifyingGlass, CaretCircleDown } from 'phosphor-react'
+import { useTheme } from '@mui/material/styles'
 
 const ChatHeader = () => {
+  const theme = useTheme()
+
   return (
     <>
       <Box
@@ -12,7 +15,7 @@ const ChatHeader = () => {
         sx={{
           width: '100%',
           height: 100,
-          bgcolor: '#F8FAFF',
+          bgcolor: theme.palette.mode === 'light' ? '#F8FAFF' : theme.palette.background,
           boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
         }}
       >
