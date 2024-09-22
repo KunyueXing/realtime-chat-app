@@ -1,4 +1,4 @@
-import { WechatLogo, Users, Phone, GearSix } from '@phosphor-icons/react'
+import { WechatLogo, Users, Phone, GearSix, Image, Sticker, Camera, FileArrowUp, User } from '@phosphor-icons/react'
 import React from 'react'
 import { faker } from '@faker-js/faker'
 
@@ -21,6 +21,44 @@ const Nav_Settings = [
   {
     index: 3,
     icon: <GearSix />
+  }
+]
+
+const Chat_Footer = [
+  {
+    index: 4,
+    color: '#d1c4e9',
+    icon: <Image size={24} />,
+    y: 102,
+    title: 'Photo/Video'
+  },
+  {
+    index: 5,
+    color: '#b39ddb',
+    icon: <Sticker size={24} />,
+    y: 172,
+    title: 'Stickers'
+  },
+  {
+    index: 6,
+    color: '#9575cd',
+    icon: <Camera size={24} />,
+    y: 242,
+    title: 'Camera'
+  },
+  {
+    index: 7,
+    color: '#7e57c2',
+    icon: <FileArrowUp size={24} />,
+    y: 312,
+    title: 'Document'
+  },
+  {
+    index: 8,
+    color: '#673ab7',
+    icon: <User size={24} />,
+    y: 382,
+    title: 'Contact'
   }
 ]
 
@@ -107,4 +145,4 @@ const ChatList = [
   }
 ]
 
-export { Nav_Buttons, Nav_Settings, ChatList }
+export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer }
