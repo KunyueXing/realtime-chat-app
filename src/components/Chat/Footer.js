@@ -2,7 +2,7 @@ import React from 'react'
 import { Box, Stack, TextField, Tooltip, Fab, InputAdornment, IconButton } from '@mui/material'
 import { Chat_Footer } from '../../data'
 import { useTheme, styled } from '@mui/material/styles'
-import { LinkSimple, Smiley } from 'phosphor-react'
+import { LinkSimple, Smiley, PaperPlaneTilt } from 'phosphor-react'
 
 const StyledInput = styled(TextField)(({ theme }) => ({
   '& .MuiInputBase-input': {
@@ -52,6 +52,8 @@ const ChatInput = () => {
 }
 
 const Footer = () => {
+  const theme = useTheme()
+
   return (
     <Box sx={{ position: 'relative', bgcolor: 'transparent !important' }}>
       <Box
@@ -68,6 +70,13 @@ const Footer = () => {
             <Box>{/* emoji */}</Box>
             <ChatInput />
           </Stack>
+          <Box sx={{ height: 48, width: 48, bgcolor: theme.palette.primary.main, borderRadius: 1.5 }}>
+            <Stack sx={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
+              <IconButton>
+                <PaperPlaneTilt color='#fff' />
+              </IconButton>
+            </Stack>
+          </Box>
         </Stack>
       </Box>
     </Box>
