@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Stack, Divider, IconButton, Icon, Avatar } from '@mui/material'
+import { Box, Stack, Divider, IconButton, Avatar } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'

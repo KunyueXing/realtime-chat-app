@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import SimpleBarReact from 'simplebar-react'
 import { alpha, styled } from '@mui/material/styles'
+import React from 'react'
 
 const RootStyle = styled('div')(() => ({
   // Allows the div to grow and fill any available space in its parent container.

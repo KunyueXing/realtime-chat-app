@@ -1,9 +1,8 @@
 import React from 'react'
 import { styled, useTheme, alpha } from '@mui/material/styles'
 import { Box, Badge, Stack, Avatar, Typography } from '@mui/material'
-import { useSearchParams } from 'react-router-dom'
-import { faker } from '@faker-js/faker'
 import StyledBadge from './StyledBadge'
+import PropTypes from 'prop-types'
 
 const truncateText = (string, n) => {
   return string?.length > n ? `${string?.slice(0, n)}...` : string
@@ -46,6 +45,15 @@ const ChatElement = ({ img, name, msg, time, unread, id }) => {
       </Stack>
     </StyledChatBox>
   )
+}
+
+ChatElement.propTypes = {
+  img: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
+  msg: PropTypes.string.isRequired,
+  time: PropTypes.string.isRequired,
+  unread: PropTypes.number.isRequired,
+  id: PropTypes.string // You can also set this to `.isRequired` if necessary
 }
 
 export default ChatElement

@@ -30,7 +30,7 @@ const ChatInput = () => {
                 </Tooltip>
               ))}
             </Stack>
-            <InputAdornment>
+            <InputAdornment position='start'>
               <IconButton>
                 <LinkSimple />
               </IconButton>
@@ -39,7 +39,7 @@ const ChatInput = () => {
         ),
         endAdornment: (
           <Stack sx={{ position: 'relative' }}>
-            <InputAdornment>
+            <InputAdornment position='end'>
               <IconButton>
                 <Smiley />
               </IconButton>
