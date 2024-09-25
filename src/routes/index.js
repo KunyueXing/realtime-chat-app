@@ -12,12 +12,17 @@ import React from 'react'
   lazy: Used to dynamically import components, which enables code-splitting. This helps improve performance by loading 
   parts of the application only when they are needed (on demand).
 */
-const Loadable = (Component) => (props) => {
-  return (
+const Loadable = (Component) => {
+  const LoadableComponent = (props) => (
     <Suspense fallback={<LoadingScreen />}>
       <Component {...props} />
     </Suspense>
   )
+
+  // Set displayName for the dynamically created component
+  LoadableComponent.displayName = `Loadable(${Component.displayName || Component.name || 'Component'})`
+
+  return LoadableComponent
 }
 
 export default function Router() {
