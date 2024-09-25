@@ -7,8 +7,9 @@ import { SimpleBarStyle } from '../../components/Scrollbar'
 import ChatElement from '../../components/ChatElement'
 import { ChatList } from '../../data'
 
-const Chats = () => {
+const ChatsList = () => {
   const theme = useTheme()
+  console.log('Rendering ChatsList component')
 
   return (
     <>
@@ -50,14 +51,14 @@ const Chats = () => {
                 </Typography>
                 {/* <ChatElement /> */}
                 {ChatList.filter((ele) => ele.pinned).map((ele) => {
-                  return <ChatElement {...ele} />
+                  return <ChatElement {...ele} key={`chat-${ele.id}`} />
                 })}
                 <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                   All Chats
                 </Typography>
                 {/* <ChatElement /> */}
                 {ChatList.filter((ele) => !ele.pinned).map((ele) => {
-                  return <ChatElement {...ele} />
+                  return <ChatElement {...ele} key={`chat2-${ele.id}`} />
                 })}
               </Stack>
             </SimpleBarStyle>
@@ -68,4 +69,4 @@ const Chats = () => {
   )
 }
 
-export default Chats
+export default ChatsList
