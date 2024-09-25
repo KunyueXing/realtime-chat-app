@@ -1,5 +1,5 @@
 import { Box, Stack } from '@mui/material'
-import { ChatHeader, ChatFooter } from '../../components/Chat'
+import { ChatHeader, ChatFooter, Messages } from '../../components/Chat'
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
 
@@ -19,7 +19,9 @@ const ChatComponent = () => {
           bgcolor: theme.palette.mode === 'light' ? '#F0F4FA' : theme.palette.background,
           boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
         }}
-      ></Box>
+      >
+        <Messages />
+      </Box>
       <ChatFooter />
     </Stack>
   )
