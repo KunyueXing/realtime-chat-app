@@ -2,6 +2,7 @@ import { Box, Stack } from '@mui/material'
 import { ChatHeader, ChatFooter, Messages } from '../../components/Chat'
 import { useTheme } from '@mui/material/styles'
 import React from 'react'
+import { SimpleBarStyle } from '../../components/Scrollbar'
 
 const ChatComponent = () => {
   const theme = useTheme()
@@ -20,7 +21,9 @@ const ChatComponent = () => {
           boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
         }}
       >
-        <Messages />
+        <SimpleBarStyle timeout={500} clickOnTrack={false}>
+          <Messages />
+        </SimpleBarStyle>
       </Box>
       <ChatFooter />
     </Stack>
