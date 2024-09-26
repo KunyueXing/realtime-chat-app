@@ -96,6 +96,7 @@ const MediaMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOption />
     </Stack>
   )
 }
@@ -158,6 +159,7 @@ const DocMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOption />
     </Stack>
   )
 }
@@ -202,6 +204,7 @@ const LinkMsg = ({ ele }) => {
           </Stack>
         </Stack>
       </Box>
+      <MessageOption />
     </Stack>
   )
 }
@@ -240,6 +243,7 @@ const ReplyMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
+      <MessageOption />
     </Stack>
   )
 }
