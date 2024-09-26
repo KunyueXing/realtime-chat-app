@@ -14,7 +14,7 @@ const StyledChatBox = styled(Box)(({ theme }) => ({
   }
 }))
 
-const ChatElement = ({ img, name, msg, time, unread, id }) => {
+const ChatElement = ({ img, name, msg, time, unread }) => {
   const theme = useTheme()
 
   return (
@@ -52,8 +52,7 @@ ChatElement.propTypes = {
   name: PropTypes.string.isRequired,
   msg: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  unread: PropTypes.number.isRequired,
-  id: PropTypes.string // You can also set this to `.isRequired` if necessary
+  unread: PropTypes.number.isRequired
 }
 
 export default ChatElement
