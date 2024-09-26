@@ -3,10 +3,11 @@ import { styled, useTheme, alpha } from '@mui/material/styles'
 import { Box, Badge, Stack, Avatar, Typography } from '@mui/material'
 import StyledBadge from './StyledBadge'
 import PropTypes from 'prop-types'
+import truncateString from '../utils/truncateString'
 
-const truncateText = (string, n) => {
-  return string?.length > n ? `${string?.slice(0, n)}...` : string
-}
+// const truncateText = (string, n) => {
+//   return string?.length > n ? `${string?.slice(0, n)}...` : string
+// }
 
 const StyledChatBox = styled(Box)(({ theme }) => ({
   '&:hover': {
@@ -33,7 +34,7 @@ const ChatElement = ({ img, name, msg, time, unread }) => {
           </StyledBadge>
           <Stack spacing={0.3}>
             <Typography variant='subtitle2'>{name}</Typography>
-            <Typography variant='caption'>{truncateText(msg, 20)}</Typography>
+            <Typography variant='caption'>{truncateString(msg, 20)}</Typography>
           </Stack>
         </Stack>
         <Stack spacing={2} sx={{ alignItems: 'center' }}>
