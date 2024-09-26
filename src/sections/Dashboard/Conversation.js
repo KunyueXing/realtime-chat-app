@@ -1,9 +1,11 @@
 import React from 'react'
-import { Box, Divider, IconButton, Stack, Typography } from '@mui/material'
+import { Box, Divider, IconButton, Stack, Typography, Menu, MenuItem } from '@mui/material'
 import { useTheme, alpha } from '@mui/material/styles'
 import PropTypes from 'prop-types'
-import { Image, DownloadSimple } from 'phosphor-react'
+import { Image, DownloadSimple, DotsThreeVertical } from 'phosphor-react'
 import { Link } from 'react-router-dom'
+import { Message_options } from '../../data'
+import { useState } from 'react'
 
 const elePropType = PropTypes.shape({
   text: PropTypes.string, // For Timeline
@@ -13,6 +15,47 @@ const elePropType = PropTypes.shape({
   reply: PropTypes.string,
   preview: PropTypes.string
 }).isRequired
+
+const MessageOption = () => {
+  const [anchorEl, setAnchorEl] = useState(null)
+  const open = Boolean(anchorEl)
+  const handleClose = () => {
+    setAnchorEl(null)
+  }
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget)
+  }
+
+  return (
+    <>
+      <DotsThreeVertical
+        size={20}
+        id='basic-button'
+        aria-controls={open ? 'basic-menu' : undefined}
+        aria-haspopup='true'
+        aria-expanded={open ? 'true' : undefined}
+        onClick={handleClick}
+      />
+      <Menu
+        id='basic-menu'
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        MenuListProps={{
+          'aria-labelledby': 'basic-button'
+        }}
+      >
+        <Stack spacing={1} px={1}>
+          {Message_options.map((ele, index) => (
+            <MenuItem onClick={handleClose} key={`message_options-${index}`}>
+              {ele.title}
+            </MenuItem>
+          ))}
+        </Stack>
+      </Menu>
+    </>
+  )
+}
 
 const Timeline = ({ ele }) => {
   const theme = useTheme()
@@ -79,6 +122,7 @@ const TextMsg = ({ ele }) => {
           {ele.message}
         </Typography>
       </Box>
+      <MessageOption />
     </Stack>
   )
 }

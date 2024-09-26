@@ -215,4 +215,25 @@ const Chat_History = [
   }
 ]
 
-export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History }
+const Message_options = [
+  {
+    title: 'Reply'
+  },
+  {
+    title: 'React to message'
+  },
+  {
+    title: 'Forward message'
+  },
+  {
+    title: 'Star message'
+  },
+  {
+    title: 'Report'
+  },
+  {
+    title: 'Delete Message'
+  }
+]
+
+export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options }
