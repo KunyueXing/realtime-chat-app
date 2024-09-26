@@ -16,6 +16,8 @@ const StyledInput = styled(TextField)({
 })
 
 const ChatInput = ({ openPicker, setOpenPicker }) => {
+  const [openActions, setOpenActions] = useState(false)
+
   return (
     <StyledInput
       fullWidth
@@ -25,17 +27,31 @@ const ChatInput = ({ openPicker, setOpenPicker }) => {
         disableUnderline: true,
         startAdornment: (
           <Stack sx={{ width: 'auto' }}>
-            <Stack sx={{ position: 'relative', display: 'inline-block' }}>
+            <Stack sx={{ position: 'relative', display: openActions ? 'inline-block' : 'none' }}>
               {Chat_Footer.map((ele) => (
                 <Tooltip placement='right' title={ele.title} key={`footer-${ele.index}`}>
-                  <Fab sx={{ position: 'absolute', top: -ele.y, bgcolor: ele.color }} aria-label='add'>
+                  <Fab
+                    sx={{
+                      position: 'absolute',
+                      top: -ele.y,
+                      bgcolor: ele.color
+                    }}
+                    aria-label='add'
+                    onClick={() => {
+                      setOpenActions(!openActions)
+                    }}
+                  >
                     {ele.icon}
                   </Fab>
                 </Tooltip>
               ))}
             </Stack>
-            <InputAdornment position='start'>
-              <IconButton>
+            <InputAdornment position='end'>
+              <IconButton
+                onClick={() => {
+                  setOpenActions(!openActions)
+                }}
+              >
                 <LinkSimple />
               </IconButton>
             </InputAdornment>
