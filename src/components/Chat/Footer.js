@@ -3,15 +3,19 @@ import { Box, Stack, TextField, Tooltip, Fab, InputAdornment, IconButton } from 
 import { Chat_Footer } from '../../data'
 import { useTheme, styled } from '@mui/material/styles'
 import { LinkSimple, Smiley, PaperPlaneTilt } from 'phosphor-react'
+import data from '@emoji-mart/data'
+import Picker from '@emoji-mart/react'
+import { useState } from 'react'
+import PropTypes from 'prop-types'
 
-const StyledInput = styled(TextField)(({ theme }) => ({
+const StyledInput = styled(TextField)({
   '& .MuiInputBase-input': {
     paddingTop: '12px !important',
     paddingBottom: '12px !important'
   }
-}))
+})
 
-const ChatInput = () => {
+const ChatInput = ({ openPicker, setOpenPicker }) => {
   return (
     <StyledInput
       fullWidth
@@ -40,7 +44,11 @@ const ChatInput = () => {
         endAdornment: (
           <Stack sx={{ position: 'relative' }}>
             <InputAdornment position='end'>
-              <IconButton>
+              <IconButton
+                onClick={() => {
+                  setOpenPicker(!openPicker)
+                }}
+              >
                 <Smiley />
               </IconButton>
             </InputAdornment>
@@ -51,8 +59,15 @@ const ChatInput = () => {
   )
 }
 
+ChatInput.propTypes = {
+  openPicker: PropTypes.bool.isRequired,
+  setOpenPicker: PropTypes.func.isRequired
+}
+
 const Footer = () => {
   const theme = useTheme()
+
+  const [openPicker, setOpenPicker] = useState(false)
 
   return (
     <Box sx={{ position: 'relative', bgcolor: 'transparent !important' }}>
@@ -67,8 +82,18 @@ const Footer = () => {
       >
         <Stack direction='row' sx={{ alignItems: 'center' }} spacing={3}>
           <Stack sx={{ width: '100%' }}>
-            <Box>{/* emoji */}</Box>
-            <ChatInput />
+            <Box
+              style={{
+                display: openPicker ? 'inline' : 'none',
+                zIndex: 10,
+                position: 'fixed',
+                bottom: 81,
+                right: 100
+              }}
+            >
+              <Picker theme={theme.palette.mode} data={data} onEmojiSelect={console.log} />
+            </Box>
+            <ChatInput openPicker={openPicker} setOpenPicker={setOpenPicker} />
           </Stack>
           <Box sx={{ height: 48, width: 48, bgcolor: theme.palette.primary.main, borderRadius: 1.5 }}>
             <Stack sx={{ height: '100%', width: '100%', alignItems: 'center', justifyContent: 'center' }}>
