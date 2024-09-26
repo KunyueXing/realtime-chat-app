@@ -1,4 +1,4 @@
-import { WechatLogo, Users, Phone, GearSix, Image, Sticker, Camera, FileArrowUp, User } from '@phosphor-icons/react'
+import { WechatLogo, Users, Phone, GearSix, Image, Sticker, Camera, FileArrowUp, User, Gear, SignOut } from '@phosphor-icons/react'
 import React from 'react'
 import { faker } from '@faker-js/faker'
 
@@ -236,4 +236,19 @@ const Message_options = [
   }
 ]
 
-export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options }
+const Profile_Menu = [
+  {
+    title: 'Profile',
+    icon: <User />
+  },
+  {
+    title: 'Settings',
+    icon: <Gear />
+  },
+  {
+    title: 'Sign Out',
+    icon: <SignOut />
+  }
+]
+
+export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options, Profile_Menu }

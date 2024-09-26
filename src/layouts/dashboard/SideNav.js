@@ -1,14 +1,14 @@
 import React from 'react'
-import { Box, Stack, Divider, IconButton, Avatar } from '@mui/material'
+import { Box, Stack, Divider, IconButton } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import Logo from '../../assets/Images/elephant.ico'
 import { Nav_Buttons, Nav_Settings } from '../../data'
 import { useSelector, useDispatch } from 'react-redux'
 import { UpdateTab } from '../../redux/slices/app'
 import { useNavigate } from 'react-router-dom'
-import { faker } from '@faker-js/faker'
 import MuiSwitch from '../../components/MuiSwitch'
 import useSettings from '../../hooks/useSettings'
+import { ProfileMenu } from './ProfileMenu'
 
 const getPath = (index) => {
   switch (index) {
@@ -134,7 +134,7 @@ const SideNav = () => {
         <Stack spacing={4} sx={{ alignItems: 'center' }}>
           <MuiSwitch defaultChecked={theme.palette.mode === 'dark'} onChange={onToggleMode} />
           {/* Use faker to generate an random image as avatar example */}
-          <Avatar src={faker.image.avatar()} />
+          <ProfileMenu />
         </Stack>
       </Stack>
     </Box>
