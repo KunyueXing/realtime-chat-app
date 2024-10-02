@@ -4,9 +4,12 @@ import StyledBadge from '../StyledBadge'
 import { faker } from '@faker-js/faker'
 import { VideoCamera, Phone, MagnifyingGlass, CaretCircleDown } from 'phosphor-react'
 import { useTheme } from '@mui/material/styles'
+import { useDispatch } from 'react-redux'
+import { ToggleSidebar } from '../../redux/slices/app'
 
 const ChatHeader = () => {
   const theme = useTheme()
+  const dispatch = useDispatch()
 
   return (
     <>
@@ -28,7 +31,13 @@ const ChatHeader = () => {
             height: '100%'
           }}
         >
-          <Stack spacing={2} direction='row'>
+          <Stack
+            spacing={2}
+            direction='row'
+            onClick={() => {
+              dispatch(ToggleSidebar())
+            }}
+          >
             <Box>
               <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
                 <Avatar src={faker.image.avatar()} />

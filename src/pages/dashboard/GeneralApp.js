@@ -4,11 +4,14 @@ import { Box, Stack } from '@mui/material'
 import ChatComponent from './Conversation'
 import { useTheme } from '@mui/material/styles'
 import { Contact } from '../../sections/Dashboard/Contact'
+import { useSelector } from 'react-redux'
 
 const GeneralApp = () => {
   // console.log('Hello')
-  console.log('Rendering GeneralApp component')
+  // console.log('Rendering GeneralApp component')
   const theme = useTheme()
+  const { sideBar } = useSelector((state) => state.app)
+  console.log(sideBar, 'sidebar')
 
   return (
     <>
@@ -18,13 +21,23 @@ const GeneralApp = () => {
         <Box
           sx={{
             height: '100%',
-            width: 'calc(100vw - 740px)',
+            width: sideBar.open ? 'calc(100vw - 740px)' : 'calc(100vw - 420px)',
             bgcolor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background
           }}
         >
           <ChatComponent />
         </Box>
-        <Contact />
+        {sideBar.open &&
+          (() => {
+            switch (sideBar.type) {
+              case 'CONTACT':
+                return <Contact />
+
+              default:
+                break
+            }
+          })()
+        }
       </Stack>
     </>
   )

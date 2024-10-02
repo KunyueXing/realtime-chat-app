@@ -14,7 +14,7 @@ const Contact = () => {
             justifyContent='space-between'
             spacing={3}
           >
-            <Typography>Contact Info</Typography>
+            <Typography variant='subtitle2'>Contact Info</Typography>
             <IconButton>
               <XCircle />
             </IconButton>
