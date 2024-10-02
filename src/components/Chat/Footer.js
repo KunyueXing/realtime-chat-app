@@ -26,7 +26,7 @@ const ChatInput = ({ openPicker, setOpenPicker }) => {
       InputProps={{
         disableUnderline: true,
         startAdornment: (
-          <Stack sx={{ width: 'auto' }}>
+          <Stack sx={{ width: 'max-content' }}>
             <Stack sx={{ position: 'relative', display: openActions ? 'inline-block' : 'none' }}>
               {Chat_Footer.map((ele) => (
                 <Tooltip placement='right' title={ele.title} key={`footer-${ele.index}`}>
