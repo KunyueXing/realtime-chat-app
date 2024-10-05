@@ -6,6 +6,7 @@ import { useTheme } from '@mui/material/styles'
 import { Contact } from '../../sections/Dashboard/Contact'
 import { useSelector } from 'react-redux'
 import { SharedMessages } from '../../sections/Dashboard/SharedMessages'
+import { StarredMessages } from '../../sections/Dashboard/StarredMessages'
 
 const GeneralApp = () => {
   // console.log('Hello')
@@ -36,6 +37,9 @@ const GeneralApp = () => {
 
               case 'SHARED':
                 return <SharedMessages />
+
+              case 'STARRED':
+                return <StarredMessages />
 
               default:
                 break
