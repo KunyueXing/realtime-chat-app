@@ -3,7 +3,7 @@ import React from 'react'
 import { Bell, CaretRight, Phone, Prohibit, Star, Trash, VideoCamera, XCircle } from 'phosphor-react'
 import { useTheme } from '@mui/material/styles'
 import { useDispatch } from 'react-redux'
-import { ToggleSidebar } from '../../redux/slices/app'
+import { ToggleSidebar, UpdateSidebarType } from '../../redux/slices/app'
 import { faker } from '@faker-js/faker'
 
 const Contact = () => {
@@ -77,7 +77,14 @@ const Contact = () => {
           <Divider />
           <Stack direction={'row'} sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
             <Typography variant='subtitle2'>Media, Links and Docs</Typography>
-            <Button endIcon={<CaretRight />}>401</Button>
+            <Button
+              onClick={() => {
+                dispatch(UpdateSidebarType('SHARED'))
+              }}
+              endIcon={<CaretRight />}
+            >
+              401
+            </Button>
           </Stack>
           <Stack direction={'row'} sx={{ alignItems: 'center' }} spacing={2}>
             {[1, 2, 3].map((ele, index) => (

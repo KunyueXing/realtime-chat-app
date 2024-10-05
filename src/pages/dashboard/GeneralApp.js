@@ -5,6 +5,7 @@ import ChatComponent from './Conversation'
 import { useTheme } from '@mui/material/styles'
 import { Contact } from '../../sections/Dashboard/Contact'
 import { useSelector } from 'react-redux'
+import { SharedMessages } from '../../sections/Dashboard/SharedMessages'
 
 const GeneralApp = () => {
   // console.log('Hello')
@@ -32,6 +33,9 @@ const GeneralApp = () => {
             switch (sideBar.type) {
               case 'CONTACT':
                 return <Contact />
+
+              case 'SHARED':
+                return <SharedMessages />
 
               default:
                 break
