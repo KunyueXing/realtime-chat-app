@@ -5,6 +5,7 @@ import { useTheme } from '@mui/material/styles'
 import { useDispatch } from 'react-redux'
 import { ToggleSidebar, UpdateSidebarType } from '../../redux/slices/app'
 import { faker } from '@faker-js/faker'
+import { sidebarPageMappings } from '../../utils/constants'
 
 const Contact = () => {
   const theme = useTheme()
@@ -79,7 +80,7 @@ const Contact = () => {
             <Typography variant='subtitle2'>Media, Links and Docs</Typography>
             <Button
               onClick={() => {
-                dispatch(UpdateSidebarType('SHARED'))
+                dispatch(UpdateSidebarType(sidebarPageMappings[1]))
               }}
               endIcon={<CaretRight />}
             >
@@ -110,7 +111,7 @@ const Contact = () => {
             </Stack>
             <IconButton
               onClick={() => {
-                dispatch(UpdateSidebarType('STARRED'))
+                dispatch(UpdateSidebarType(sidebarPageMappings[2]))
               }}
             >
               <CaretRight />

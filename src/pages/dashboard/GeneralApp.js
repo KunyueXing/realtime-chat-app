@@ -7,6 +7,7 @@ import { Contact } from '../../sections/Dashboard/Contact'
 import { useSelector } from 'react-redux'
 import { SharedMessages } from '../../sections/Dashboard/SharedMessages'
 import { StarredMessages } from '../../sections/Dashboard/StarredMessages'
+import { sidebarPageMappings } from '../../utils/constants'
 
 const GeneralApp = () => {
   // console.log('Hello')
@@ -32,13 +33,13 @@ const GeneralApp = () => {
         {sideBar.open &&
           (() => {
             switch (sideBar.type) {
-              case 'CONTACT':
+              case sidebarPageMappings[0]:
                 return <Contact />
 
-              case 'SHARED':
+              case sidebarPageMappings[1]:
                 return <SharedMessages />
 
-              case 'STARRED':
+              case sidebarPageMappings[2]:
                 return <StarredMessages />
 
               default:
