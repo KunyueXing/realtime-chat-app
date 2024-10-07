@@ -251,4 +251,114 @@ const Profile_Menu = [
   }
 ]
 
-export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options, Profile_Menu }
+const Shared_docs = [
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'doc',
+    message: 'Yes sure, here you go.',
+    incoming: true,
+    outgoing: false
+  }
+]
+
+const Shared_links = [
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  },
+  {
+    type: 'msg',
+    subtype: 'link',
+    preview: faker.image.url({ category: 'cats' }),
+    message: 'Yep, I can also do that',
+    incoming: true,
+    outgoing: false
+  }
+]
+
+export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options, Profile_Menu, Shared_docs, Shared_links }

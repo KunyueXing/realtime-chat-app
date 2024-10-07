@@ -1,4 +1,4 @@
-import { Box, Grid, IconButton, Stack, Tab, Tabs, Typography } from '@mui/material'
+import { Box, Divider, Grid, IconButton, Stack, Tab, Tabs, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { ArrowLeft } from 'phosphor-react'
 import React from 'react'
@@ -7,6 +7,8 @@ import { UpdateSidebarType } from '../../redux/slices/app'
 import { sidebarPageMappings } from '../../utils/constants'
 import { useState } from 'react'
 import { faker } from '@faker-js/faker'
+import { Shared_docs, Shared_links } from '../../data'
+import { DocMsg, LinkMsg } from './Conversation'
 
 const SharedMessages = () => {
   const theme = useTheme()
@@ -71,10 +73,20 @@ const SharedMessages = () => {
                 )
 
               case 1:
-                break
+                return Shared_links.map((ele, index) => (
+                  <Box width={320} key={`sharedLinks-${index}`}>
+                    <LinkMsg ele={ele} />
+                    <Divider />
+                  </Box>
+                ))
 
               case 2:
-                break
+                return Shared_docs.map((ele, index) => (
+                  <Box width={320} key={`sharedDocs-${index}`}>
+                    <DocMsg ele={ele} />
+                    <Divider />
+                  </Box>
+                ))
 
               default:
                 break
