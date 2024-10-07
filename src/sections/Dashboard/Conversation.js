@@ -75,7 +75,7 @@ Timeline.propTypes = {
   ele: elePropType
 }
 
-const MediaMsg = ({ ele }) => {
+const MediaMsg = ({ ele, menu }) => {
   const theme = useTheme()
 
   return (
@@ -96,16 +96,17 @@ const MediaMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOption />
+      {menu && <MessageOption />}
     </Stack>
   )
 }
 
 MediaMsg.propTypes = {
-  ele: elePropType
+  ele: elePropType,
+  menu: PropTypes.bool
 }
 
-const TextMsg = ({ ele }) => {
+const TextMsg = ({ ele, menu }) => {
   const theme = useTheme()
 
   return (
@@ -123,16 +124,17 @@ const TextMsg = ({ ele }) => {
           {ele.message}
         </Typography>
       </Box>
-      <MessageOption />
+      {menu && <MessageOption />}
     </Stack>
   )
 }
 
 TextMsg.propTypes = {
-  ele: elePropType
+  ele: elePropType,
+  menu: PropTypes.bool
 }
 
-const DocMsg = ({ ele }) => {
+const DocMsg = ({ ele, menu }) => {
   const theme = useTheme()
 
   return (
@@ -159,16 +161,17 @@ const DocMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOption />
+      {menu && <MessageOption />}
     </Stack>
   )
 }
 
 DocMsg.propTypes = {
-  ele: elePropType
+  ele: elePropType,
+  menu: PropTypes.bool
 }
 
-const LinkMsg = ({ ele }) => {
+const LinkMsg = ({ ele, menu }) => {
   const theme = useTheme()
   // console.log(ele.preview)
 
@@ -204,16 +207,17 @@ const LinkMsg = ({ ele }) => {
           </Stack>
         </Stack>
       </Box>
-      <MessageOption />
+      {menu && <MessageOption />}
     </Stack>
   )
 }
 
 LinkMsg.propTypes = {
-  ele: elePropType
+  ele: elePropType,
+  menu: PropTypes.bool
 }
 
-const ReplyMsg = ({ ele }) => {
+const ReplyMsg = ({ ele, menu }) => {
   const theme = useTheme()
 
   return (
@@ -243,13 +247,14 @@ const ReplyMsg = ({ ele }) => {
           </Typography>
         </Stack>
       </Box>
-      <MessageOption />
+      {menu && <MessageOption />}
     </Stack>
   )
 }
 
 ReplyMsg.propTypes = {
-  ele: elePropType
+  ele: elePropType,
+  menu: PropTypes.bool
 }
 
 export { Timeline, MediaMsg, TextMsg, DocMsg, LinkMsg, ReplyMsg }

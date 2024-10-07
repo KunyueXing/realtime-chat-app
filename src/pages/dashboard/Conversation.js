@@ -22,7 +22,7 @@ const ChatComponent = () => {
         }}
       >
         <SimpleBarStyle timeout={500} clickOnTrack={false}>
-          <Messages />
+          <Messages menu={true} />
         </SimpleBarStyle>
       </Box>
       <ChatFooter />

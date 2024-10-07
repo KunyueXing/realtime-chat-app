@@ -2,8 +2,9 @@ import { Box, Stack } from '@mui/material'
 import React from 'react'
 import { Chat_History } from '../../data'
 import { Timeline, MediaMsg, TextMsg, DocMsg, ReplyMsg, LinkMsg } from '../../sections/Dashboard/Conversation'
+import PropTypes from 'prop-types'
 
-const Messages = () => {
+const Messages = ({ menu }) => {
   return (
     <Box p={3}>
       <Stack spacing={3}>
@@ -15,15 +16,15 @@ const Messages = () => {
             case 'msg':
               switch (ele.subtype) {
                 case 'img':
-                  return <MediaMsg ele={ele} key={`message-${index}`} />
+                  return <MediaMsg ele={ele} key={`message-${index}`} menu={menu} />
                 case 'doc':
-                  return <DocMsg ele={ele} key={`message-${index}`} />
+                  return <DocMsg ele={ele} key={`message-${index}`} menu={menu} />
                 case 'link':
-                  return <LinkMsg ele={ele} key={`message-${index}`} />
+                  return <LinkMsg ele={ele} key={`message-${index}`} menu={menu} />
                 case 'reply':
-                  return <ReplyMsg ele={ele} key={`message-${index}`} />
+                  return <ReplyMsg ele={ele} key={`message-${index}`} menu={menu} />
                 default:
-                  return <TextMsg ele={ele} key={`message-${index}`} />
+                  return <TextMsg ele={ele} key={`message-${index}`} menu={menu} />
               }
 
             default:
@@ -33,6 +34,10 @@ const Messages = () => {
       </Stack>
     </Box>
   )
+}
+
+Messages.propTypes = {
+  menu: PropTypes.bool
 }
 
 export default Messages

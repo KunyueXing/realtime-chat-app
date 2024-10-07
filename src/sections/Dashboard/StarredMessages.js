@@ -5,7 +5,7 @@ import { ArrowLeft } from 'phosphor-react'
 import { useDispatch } from 'react-redux'
 import { UpdateSidebarType } from '../../redux/slices/app'
 import { sidebarPageMappings } from '../../utils/constants'
-import ChatComponent from '../../pages/dashboard/Conversation'
+import { Messages } from '../../components/Chat'
 
 const StarredMessages = () => {
   const theme = useTheme()
@@ -33,7 +33,7 @@ const StarredMessages = () => {
           </Stack>
         </Box>
         <Stack sx={{ height: '100%', position: 'relative', flexGrow: 1, overflow: 'scroll' }} spacing={3}>
-          <ChatComponent />
+          <Messages menu={false} />
         </Stack>
       </Stack>
     </Box>
