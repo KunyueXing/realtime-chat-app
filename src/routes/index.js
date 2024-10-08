@@ -37,6 +37,7 @@ export default function Router() {
       children: [
         { element: <Navigate to={DEFAULT_PATH} replace />, index: true },
         { path: 'app', element: <GeneralApp /> },
+        { path: 'settings', element: <Settings /> },
 
         { path: '404', element: <Page404 /> },
         // When users visit a non-existing path, it will be redirected to '/404'path
@@ -54,3 +55,5 @@ export default function Router() {
 const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')))
 
 const Page404 = Loadable(lazy(() => import('../pages/Page404')))
+
+const Settings = Loadable(lazy(() => import('../pages/dashboard/Settings')))
