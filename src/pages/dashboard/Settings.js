@@ -14,11 +14,14 @@ const Settings = () => {
         {/* left panel */}
         <Box
           sx={{
-            overflowY: 'scroll',
+            // overflowY: 'scroll',
+            // overflow: 'hidden', // for debug
+            overflowY: 'auto',
             height: '100%',
             width: 320,
             bgcolor: theme.palette.mode === 'light' ? '#F8FAFF' : theme.palette.background,
             boxShadow: '0px 0px 2px rgba(0, 0, 0, 0.25)'
+            // border: '1px solid red' // Debug border
           }}
         >
           <Stack p={4} spacing={0} width={'100%'}>
@@ -47,7 +50,8 @@ const Settings = () => {
             // width: 'calc(100vw - 420px)',
             bgcolor: theme.palette.mode === 'light' ? '#FFF' : theme.palette.background.paper,
             borderBottom: '6px solid #0162C4',
-            flexGrow: 1
+            flexGrow: 1 // Fill remaining space
+            // border: '1px solid blue' // Debug border
           }}
         />
       </Stack>
