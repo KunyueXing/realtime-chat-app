@@ -1,11 +1,62 @@
 import { faker } from '@faker-js/faker'
-import { Avatar, Box, IconButton, Stack, Typography } from '@mui/material'
+import { Avatar, Box, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import { CaretLeft } from 'phosphor-react'
+import { Bell, CaretLeft, Image, Info, Key, Keyboard, Lock, Note, PencilCircle } from 'phosphor-react'
 import React from 'react'
 
 const Settings = () => {
   const theme = useTheme()
+
+  const settingsItems = [
+    {
+      key: 0,
+      icon: <Bell size={20} />,
+      title: 'Notifications',
+      onclick: () => {}
+    },
+    {
+      key: 1,
+      icon: <Lock size={20} />,
+      title: 'Privacy',
+      onclick: () => {}
+    },
+    {
+      key: 2,
+      icon: <Key size={20} />,
+      title: 'Security',
+      onclick: () => {}
+    },
+    {
+      key: 3,
+      icon: <PencilCircle size={20} />,
+      title: 'Theme',
+      onclick: () => {}
+    },
+    {
+      key: 4,
+      icon: <Image size={20} />,
+      title: 'Chat Wallpaper',
+      onclick: () => {}
+    },
+    {
+      key: 5,
+      icon: <Note size={20} />,
+      title: 'Request Account Info',
+      onclick: () => {}
+    },
+    {
+      key: 6,
+      icon: <Keyboard size={20} />,
+      title: 'Keyboard Shortcuts',
+      onclick: () => {}
+    },
+    {
+      key: 7,
+      icon: <Info size={20} />,
+      title: 'Help',
+      onclick: () => {}
+    }
+  ]
 
   return (
     <>
@@ -24,7 +75,7 @@ const Settings = () => {
             // border: '1px solid red' // Debug border
           }}
         >
-          <Stack p={4} spacing={0} width={'100%'}>
+          <Stack p={4} spacing={5} width={'100%'}>
             {/* header */}
             <Stack direction={'row'} alignItems={'center'} spacing={3}>
               <IconButton>
@@ -41,6 +92,21 @@ const Settings = () => {
               </Stack>
             </Stack>
             {/* list */}
+            <Stack spacing={4}>
+              {settingsItems.map(({ key, icon, title, onclick }) => {
+                return (
+                  <>
+                    <Stack onClick={onclick} sx={{ cursor: 'pointer' }} spacing={2} key={`settingItems-${key}`}>
+                      <Stack direction={'row'} spacing={2} sx={{ alignItems: 'center' }}>
+                        {icon}
+                        <Typography variant='body2'>{title}</Typography>
+                      </Stack>
+                      {key !== 7 && <Divider />}
+                    </Stack>
+                  </>
+                )
+              })}
+            </Stack>
           </Stack>
         </Box>
         {/* right panel */}
