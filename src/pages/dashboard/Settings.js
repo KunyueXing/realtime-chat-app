@@ -115,9 +115,10 @@ const Settings = () => {
             height: '100%',
             // width: 'calc(100vw - 420px)',
             bgcolor: theme.palette.mode === 'light' ? '#FFF' : theme.palette.background.paper,
-            borderBottom: '6px solid #0162C4',
-            flexGrow: 1 // Fill remaining space
-            // border: '1px solid blue' // Debug border
+            // borderBottom: '6px solid #0162C4',
+            flexGrow: 1, // Fill remaining space
+            boxSizing: 'border-box'
+            // border: '1px solid green' // Debug border
           }}
         />
       </Stack>
