@@ -2,6 +2,7 @@ import { Suspense, lazy } from 'react'
 import { Navigate, useRoutes } from 'react-router-dom'
 // Layouts
 import DashboardLayout from '../layouts/dashboard'
+import AuthLayout from '../layouts/auth'
 // config
 import LoadingScreen from '../components/LoadingScreen'
 import { DEFAULT_PATH } from '../config'
@@ -44,7 +45,12 @@ export default function Router() {
         { path: '*', element: <Navigate to='/404' replace /> }
       ]
     },
-    { path: '*', element: <Navigate to='/404' replace /> }
+    { path: '*', element: <Navigate to='/404' replace /> },
+    {
+      path: '/auth',
+      element: <AuthLayout />,
+      children: [{ path: 'login', element: <LoginPage /> }]
+    }
   ])
 }
 
@@ -57,3 +63,5 @@ const GeneralApp = Loadable(lazy(() => import('../pages/dashboard/GeneralApp')))
 const Page404 = Loadable(lazy(() => import('../pages/Page404')))
 
 const Settings = Loadable(lazy(() => import('../pages/dashboard/Settings')))
+
+const LoginPage = Loadable(lazy(() => import('../pages/auth/Login')))
