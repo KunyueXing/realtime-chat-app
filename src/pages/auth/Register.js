@@ -1,6 +1,7 @@
 import { Link, Stack, Typography } from '@mui/material'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
+import AuthRegisterForm from '../../sections/auth/RegisterForm'
 
 const Register = () => {
   return (
@@ -14,6 +15,8 @@ const Register = () => {
           </Link>
         </Stack>
       </Stack>
+      {/* Register form */}
+      <AuthRegisterForm />
     </>
   )
 }
