@@ -10,6 +10,7 @@
     "@fontsource/roboto": "^5.0.13",
     "@hookform/resolvers": "^3.9.0",
     "@mui/icons-material": "^5.16.5",
+    "@mui/lab": "^5.0.0-alpha.92",
     "@mui/material": "^5.16.5",
     "@phosphor-icons/react": "^2.1.7",
     "@reduxjs/toolkit": "^2.2.7",

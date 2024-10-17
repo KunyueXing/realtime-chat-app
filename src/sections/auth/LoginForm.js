@@ -3,9 +3,11 @@ import FormProvider from '../../components/hook-form/FormProvider'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
-import { Alert, IconButton, InputAdornment, Stack } from '@mui/material'
+import { Alert, IconButton, InputAdornment, Link, Stack } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 import { FormTextField } from '../../components/hook-form'
 import { Eye, EyeSlash } from 'phosphor-react'
+import { Link as RouterLink } from 'react-router-dom'
 
 const AuthLoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
@@ -53,7 +55,7 @@ const AuthLoginForm = () => {
     reset,
     setError,
     handleSubmit,
-    formState: { errors, isSubmitting, isSubmitSuccessful }
+    formState: { errors }
   } = methods
 
   const onSubmit = async (data) => {
@@ -93,6 +95,29 @@ const AuthLoginForm = () => {
           }}
         />
       </Stack>
+      <Stack alignItems={'flex-end'} sx={{ my: 2 }}>
+        <Link component={RouterLink} to={'/auth/reset-password'} variant='body2' color={'inherit'} underline='always'>
+          Forgot password?
+        </Link>
+      </Stack>
+      {/* LoadingButton is a component from MUI lab*/}
+      <LoadingButton
+        fullWidth
+        color='inherit'
+        size='large'
+        type='submit'
+        variant='contained'
+        sx={{
+          bgcolor: 'text.primary',
+          color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800'),
+          '&:hover': {
+            bgcolor: 'text.primary',
+            color: (theme) => (theme.palette.mode === 'light' ? 'common.white' : 'grey.800')
+          }
+        }}
+      >
+        Login
+      </LoadingButton>
     </FormProvider>
   )
 }
