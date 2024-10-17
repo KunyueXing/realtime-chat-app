@@ -2,22 +2,21 @@ import { Link, Stack, Typography } from '@mui/material'
 import { CaretLeft } from 'phosphor-react'
 import React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
-import AuthResetPasswordForm from '../../sections/auth/ResetPasswordForm.js'
+import AuthNewPasswordForm from '../../sections/auth/NewPasswordForm'
 
-const ResetPassword = () => {
+const NewPassword = () => {
   return (
     <>
       <Stack spacing={2} sx={{ mb: 5, position: 'relative' }}>
         <Typography variant='h3' paragraph>
-          Forgot your password?
+          Reset Password
         </Typography>
 
-        <Typography sx={{ color: 'text.secondary', mb: 5 }}>
-          Please enter the registered email below and check the link to reset the password in your email account.
-        </Typography>
+        <Typography sx={{ color: 'text.secondary', mb: 5 }}>Please set our new password.</Typography>
       </Stack>
-      {/* Reset password form */}
-      <AuthResetPasswordForm />
+
+      {/* new Password form*/}
+      <AuthNewPasswordForm />
 
       <Link
         component={RouterLink}
@@ -38,4 +37,4 @@ const ResetPassword = () => {
   )
 }
 
-export default ResetPassword
+export default NewPassword
