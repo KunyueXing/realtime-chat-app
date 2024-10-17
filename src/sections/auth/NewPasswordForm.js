@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form'
 import FormProvider from '../../components/hook-form/FormProvider'
 import { FormTextField } from '../../components/hook-form'
 import { LoadingButton } from '@mui/lab'
-import { Stack, InputAdornment, IconButton } from '@mui/material'
+import { Stack, InputAdornment, IconButton, Alert } from '@mui/material'
 import { Eye, EyeSlash } from 'phosphor-react'
 
 const AuthNewPasswordForm = () => {
@@ -33,7 +33,12 @@ const AuthNewPasswordForm = () => {
     defaultValues
   })
 
-  const { handleSubmit } = methods
+  const {
+    reset,
+    setError,
+    handleSubmit,
+    formState: { errors }
+  } = methods
 
   const onSubmit = async (data) => {
     try {
@@ -42,12 +47,19 @@ const AuthNewPasswordForm = () => {
       // submit data to backend, placehold
     } catch (error) {
       console.error(error)
+      reset()
+      setError('afterSubmit', {
+        ...error,
+        message: error.message
+      })
     }
   }
 
   return (
     <FormProvider methods={methods} onSubmit={handleSubmit(onSubmit)}>
       <Stack spacing={3}>
+        {!!errors.afterSubmit && <Alert severity='error'>{errors.afterSubmit.message}</Alert>}
+
         <FormTextField
           name={'password'}
           label={'Password'}
