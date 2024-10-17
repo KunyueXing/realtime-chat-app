@@ -21,7 +21,7 @@ const AuthLoginForm = () => {
       .trim()
   })
 
-  const defaultLoginValues = {
+  const defaultValues = {
     email: 'demo@gmail.com',
     password: 'demo1234'
   }
@@ -37,7 +37,7 @@ const AuthLoginForm = () => {
   */
   const methods = useForm({
     resolver: yupResolver(LoginSchema),
-    defaultLoginValues
+    defaultValues
   })
 
   /*

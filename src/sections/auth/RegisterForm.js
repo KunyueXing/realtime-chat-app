@@ -21,7 +21,7 @@ const AuthRegisterForm = () => {
     username: Yup.string().required('A username is required').trim()
   })
 
-  const defaultRegisterValues = {
+  const defaultValues = {
     email: 'demo@gmail.com',
     password: 'demo1234',
     username: 'Jenny'
@@ -29,7 +29,7 @@ const AuthRegisterForm = () => {
 
   const methods = useForm({
     resolver: yupResolver(RegisterSchema),
-    defaultRegisterValues
+    defaultValues
   })
 
   const {
