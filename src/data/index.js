@@ -361,4 +361,31 @@ const Shared_links = [
   }
 ]
 
-export { Nav_Buttons, Nav_Settings, ChatList, Chat_Footer, Chat_History, Message_options, Profile_Menu, Shared_docs, Shared_links }
+const GROUPS_TAGS_OPTION = [
+  'Toy Story 3',
+  'Logan',
+  'Full Metal Jacket',
+  'Dangal',
+  'The Sting',
+  '2001: A Space Odyssey',
+  "Singin' in the Rain",
+  'Toy Story',
+  'Bicycle Thieves',
+  'The Kid',
+  'Inglourious Basterds',
+  'Snatch',
+  '3 Idiots'
+]
+
+export {
+  Nav_Buttons,
+  Nav_Settings,
+  ChatList,
+  Chat_Footer,
+  Chat_History,
+  Message_options,
+  Profile_Menu,
+  Shared_docs,
+  Shared_links,
+  GROUPS_TAGS_OPTION
+}
