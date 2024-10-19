@@ -1,6 +1,7 @@
 import PropTypes from 'prop-types'
 import { useFormContext, Controller } from 'react-hook-form'
 import { Autocomplete, TextField } from '@mui/material'
+import React from 'react'
 
 FormAutoComplete.propTypes = {
   name: PropTypes.string,
@@ -8,7 +9,7 @@ FormAutoComplete.propTypes = {
   helperText: PropTypes.node
 }
 
-const FormAutoComplete = ({ name, label, helperText, ...other }) => {
+export default function FormAutoComplete({ name, label, helperText, ...other }) {
   const { control, setValue } = useFormContext()
 
   return (
@@ -26,5 +27,3 @@ const FormAutoComplete = ({ name, label, helperText, ...other }) => {
     />
   )
 }
-
-export default FormAutoComplete

@@ -8,11 +8,11 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 CreateGroup.propTypes = {
-  open: PropTypes.boolean,
+  open: PropTypes.bool,
   handleClose: PropTypes.func
 }
 
-const CreateGroup = ({ open, handleClose }) => {
+export default function CreateGroup({ open, handleClose }) {
   return (
     <Dialog
       fullWidth
@@ -32,5 +32,3 @@ const CreateGroup = ({ open, handleClose }) => {
     </Dialog>
   )
 }
-
-export default CreateGroup

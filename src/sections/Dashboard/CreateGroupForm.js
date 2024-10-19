@@ -1,6 +1,7 @@
 import React from 'react'
-import { FormTextField, FormAutoComplete } from '../../components/hook-form'
+import { FormTextField } from '../../components/hook-form'
 import FormProvider from '../../components/hook-form/FormProvider'
+import FormAutoComplete from '../../components/hook-form/FormAutoComplete'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
@@ -12,7 +13,7 @@ CreateGroupForm.propTypes = {
   handleClose: PropTypes.func
 }
 
-const CreateGroupForm = ({ handleClose }) => {
+export default function CreateGroupForm({ handleClose }) {
   const NewGroupSchema = Yup.object().shape({
     groupName: Yup.string().required('Group name is required').trim(),
     members: Yup.array().min(2, 'Must choose at least 2 members.')
@@ -69,5 +70,3 @@ const CreateGroupForm = ({ handleClose }) => {
     </FormProvider>
   )
 }
-
-export default CreateGroupForm
