@@ -1,5 +1,11 @@
-import { Badge } from '@mui/material'
+import { Badge, Box } from '@mui/material'
 import { styled } from '@mui/material/styles'
+
+const StyledChatBox = styled(Box)(() => ({
+  '&:hover': {
+    cursor: 'pointer'
+  }
+}))
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -29,5 +35,7 @@ const StyledBadge = styled(Badge)(({ theme }) => ({
     }
   }
 }))
+
+export { StyledChatBox }
 
 export default StyledBadge

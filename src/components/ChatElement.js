@@ -1,19 +1,10 @@
 import React from 'react'
-import { styled, useTheme, alpha } from '@mui/material/styles'
-import { Box, Badge, Stack, Avatar, Typography } from '@mui/material'
+import { useTheme } from '@mui/material/styles'
+import { Badge, Stack, Avatar, Typography } from '@mui/material'
 import StyledBadge from './StyledBadge'
 import PropTypes from 'prop-types'
 import truncateString from '../utils/truncateString'
-
-// const truncateText = (string, n) => {
-//   return string?.length > n ? `${string?.slice(0, n)}...` : string
-// }
-
-const StyledChatBox = styled(Box)(({ theme }) => ({
-  '&:hover': {
-    cursor: 'pointer'
-  }
-}))
+import { StyledChatBox } from './StyledBadge'
 
 const ChatElement = ({ img, name, msg, time, unread }) => {
   const theme = useTheme()
