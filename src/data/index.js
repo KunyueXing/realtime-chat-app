@@ -377,6 +377,113 @@ const GROUPS_TAGS_OPTION = [
   '3 Idiots'
 ]
 
+const CallList = [
+  {
+    id: 0,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  },
+  {
+    id: 1,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: false,
+    missed: true
+  },
+  {
+    id: 2,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: true,
+    missed: true
+  },
+  {
+    id: 3,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: false,
+    missed: false
+  },
+  {
+    id: 4,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  },
+  {
+    id: 5,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: false,
+    missed: false
+  },
+  {
+    id: 6,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  },
+  {
+    id: 7,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: false,
+    missed: false
+  },
+  {
+    id: 8,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  },
+  {
+    id: 9,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: false,
+    missed: false
+  },
+  {
+    id: 10,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  },
+  {
+    id: 11,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: false,
+    incoming: false,
+    missed: false
+  },
+  {
+    id: 12,
+    img: faker.image.avatar(),
+    name: faker.person.firstName(),
+    online: true,
+    incoming: true,
+    missed: false
+  }
+]
+
 export {
   Nav_Buttons,
   Nav_Settings,
@@ -387,5 +494,6 @@ export {
   Profile_Menu,
   Shared_docs,
   Shared_links,
-  GROUPS_TAGS_OPTION
+  GROUPS_TAGS_OPTION,
+  CallList
 }

@@ -4,6 +4,9 @@ import React from 'react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
 import { MagnifyingGlass, Phone } from 'phosphor-react'
 import { SimpleBarStyle } from '../../components/Scrollbar'
+import { CallDialogElement, CallElement } from '../../components/CallElement'
+import { faker } from '@faker-js/faker'
+import { CallList } from '../../data'
 
 const Call = () => {
   const theme = useTheme()
@@ -44,7 +47,14 @@ const Call = () => {
             <Divider />
             <Stack sx={{ flexGrow: 1, overflow: 'scroll', height: '100%' }}>
               <SimpleBarStyle timeout={500} clickOnTrack={false}>
-                <Stack spacing={2.4}>{/* TODO: call logs and call element */}</Stack>
+                <Stack spacing={2.4}>
+                  {/* TODO: call logs and call element */}
+                  {CallList.map((ele, idx) => {
+                    return <CallDialogElement key={`call-${idx}`} {...ele} />
+                  })}
+                  {/* <CallDialogElement img={faker.image.avatar()} name={faker.person.fullName()} incoming={false} missed={true} /> */}
+                  <CallElement img={faker.image.avatar()} name={faker.person.fullName()} />
+                </Stack>
               </SimpleBarStyle>
             </Stack>
           </Stack>
