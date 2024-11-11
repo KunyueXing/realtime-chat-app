@@ -1,15 +1,25 @@
 import { Box, Divider, IconButton, Link, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
-import React from 'react'
+import React, { useState } from 'react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
 import { MagnifyingGlass, Phone } from 'phosphor-react'
 import { SimpleBarStyle } from '../../components/Scrollbar'
 import { CallDialogElement, CallElement } from '../../components/CallElement'
 import { faker } from '@faker-js/faker'
 import { CallList } from '../../data'
+import StartCall from '../../sections/Dashboard/StartCall'
 
 const Call = () => {
   const theme = useTheme()
+
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const handleCloseDialog = () => {
+    setOpenDialog(false)
+  }
+  const handleOpenDialog = () => {
+    setOpenDialog(true)
+  }
 
   return (
     <>
@@ -40,7 +50,7 @@ const Call = () => {
               <Typography variant='subtitle2' component={Link}>
                 Start a conversation
               </Typography>
-              <IconButton>
+              <IconButton onClick={handleOpenDialog}>
                 <Phone style={{ color: theme.palette.primary.main }} />
               </IconButton>
             </Stack>
@@ -62,6 +72,7 @@ const Call = () => {
         {/* right */}
         {/* Todo: reuse conversation components */}
       </Stack>
+      {openDialog && <StartCall handleClose={handleCloseDialog} open={openDialog} />}
     </>
   )
 }
