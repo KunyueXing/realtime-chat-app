@@ -3,6 +3,8 @@ import React from 'react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
 import { MagnifyingGlass } from 'phosphor-react'
 import PropTypes from 'prop-types'
+import { CallList } from '../../data'
+import { CallElement } from '../../components/CallElement'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
@@ -36,7 +38,11 @@ export default function StartCall({ open, handleClose }) {
       </Stack>
       <DialogContent>
         <Stack sx={{ height: '100%' }}>
-          <Stack spacing={2.4}></Stack>
+          <Stack spacing={2.4}>
+            {CallList.map((ele, idx) => {
+              return <CallElement key={idx} {...ele} handleClose={handleClose} />
+            })}
+          </Stack>
         </Stack>
       </DialogContent>
     </Dialog>
