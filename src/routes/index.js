@@ -41,6 +41,7 @@ export default function Router() {
         { path: 'settings', element: <Settings /> },
         { path: 'group', element: <Group /> },
         { path: 'call', element: <CallPage /> },
+        { path: 'profile', element: <Profile /> },
 
         { path: '404', element: <Page404 /> },
         // When users visit a non-existing path, it will be redirected to '/404'path
@@ -74,6 +75,8 @@ const Settings = Loadable(lazy(() => import('../pages/dashboard/Settings')))
 const Group = Loadable(lazy(() => import('../pages/dashboard/Group')))
 
 const CallPage = Loadable(lazy(() => import('../pages/dashboard/Call')))
+
+const Profile = Loadable(lazy(() => import('../pages/dashboard/Profile')))
 
 const LoginPage = Loadable(lazy(() => import('../pages/auth/Login')))
 
