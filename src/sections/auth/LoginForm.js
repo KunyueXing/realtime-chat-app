@@ -1,11 +1,10 @@
 import React, { useState } from 'react'
-import FormProvider from '../../components/hook-form/FormProvider'
 import * as Yup from 'yup'
 import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { Alert, IconButton, InputAdornment, Link, Stack } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { FormTextField } from '../../components/hook-form'
+import { FormTextField, FormProvider } from '../../components/hook-form'
 import { Eye, EyeSlash } from 'phosphor-react'
 import { Link as RouterLink } from 'react-router-dom'
 
