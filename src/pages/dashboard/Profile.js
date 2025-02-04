@@ -2,6 +2,7 @@ import { Box, IconButton, Stack, Typography } from '@mui/material'
 import { useTheme } from '@mui/material/styles'
 import { CaretLeft } from 'phosphor-react'
 import React from 'react'
+import ProfileForm from '../../sections/Dashboard/Settings/ProfileForm'
 
 const Profile = () => {
   const theme = useTheme()
@@ -27,6 +28,7 @@ const Profile = () => {
               <Typography variant='h5'>Profile</Typography>
             </Stack>
             {/* Profile Edit Form */}
+            <ProfileForm />
           </Stack>
         </Box>
         {/* Right Pane */}
