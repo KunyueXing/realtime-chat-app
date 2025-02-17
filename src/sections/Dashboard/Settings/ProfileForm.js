@@ -5,6 +5,7 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { faker } from '@faker-js/faker'
 import { Alert, Stack } from '@mui/material'
+import { LoadingButton } from '@mui/lab'
 
 const ProfileForm = () => {
   const ProfileSchema = Yup.object().shape({
@@ -70,7 +71,13 @@ const ProfileForm = () => {
         {!!errors.afterSubmit && <Alert severity='error'>{errors.afterSubmit.message}</Alert>}
 
         <FormTextField name='name' label='Name' helperText='This name is visible to all your contacts' />
-        <FormTextField multiline rows={4} maxRows={6} name='about' label='About' />
+        <FormTextField multiline rows={5} name='about' label='About' helperText='Tell us more about yourself' />
+
+        <Stack direction={'row'} justifyContent={'end'}>
+          <LoadingButton color='primary' size='large' type='submit' variant='contained'>
+            Save
+          </LoadingButton>
+        </Stack>
       </Stack>
     </FormProvider>
   )
