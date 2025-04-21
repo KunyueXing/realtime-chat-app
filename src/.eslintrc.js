@@ -39,7 +39,9 @@ module.exports = {
     jest: true,
     browser: true,
     amd: true,
-    node: true
+    node: true,
+    // make ESLint aware of globals like Promise, window, document, etc.
+    es2021: true
   },
   /*
     eslint:recommended: Enforces basic recommended ESLint rules (such as avoiding syntax errors or undefined 
