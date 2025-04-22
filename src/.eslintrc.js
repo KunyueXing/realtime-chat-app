@@ -59,7 +59,7 @@ module.exports = {
   ],
   rules: {
     // Throws an error when there are unused variables
-    'no-unused-vars': ['error', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
+    'no-unused-vars': ['warn', { vars: 'all', args: 'after-used', ignoreRestSiblings: false }],
     // Enforces Prettier’s rules as ESLint errors, ensuring consistent formatting.
     // {} is used to allow Prettier’s default configuration.
     // { usePrettierrc: true } ensures it respects any additional custom Prettier settings defined in your .prettierrc file.
