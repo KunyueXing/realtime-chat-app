@@ -7,9 +7,12 @@ import { LoadingButton } from '@mui/lab'
 import { FormTextField, FormProvider } from '../../components/hook-form'
 import { Eye, EyeSlash } from 'phosphor-react'
 import { Link as RouterLink } from 'react-router-dom'
+import { useDispatch, useSelector } from 'react-redux'
+import { LoginUser } from '../../redux/slices/auth'
 
 const AuthLoginForm = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
 
   const LoginSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email must be a valid email address').trim(),
@@ -62,6 +65,7 @@ const AuthLoginForm = () => {
       console.log(data)
 
       // submit data to backend, placehold
+      dispatch(LoginUser(data))
     } catch (error) {
       console.error(error)
       reset()
