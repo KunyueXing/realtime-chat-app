@@ -5,7 +5,7 @@ import React from 'react'
 
 FormTextField.propTypes = {
   name: PropTypes.string.isRequired,
-  helperText: PropTypes.node.isRequired
+  helperText: PropTypes.node
 }
 
 export default function FormTextField({ name, helperText, ...other }) {
