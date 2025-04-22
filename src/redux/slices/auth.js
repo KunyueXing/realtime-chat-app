@@ -59,3 +59,20 @@ export function LogoutUser() {
     console.log('logout')
   }
 }
+
+export function ForgotPassword(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .post('/auth/forgotPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+      .then(function (response) {
+        console.log('forgot password response: ', response)
+        // Check if the response is successful
+        if (response.status === 200) {
+          console.log('Forgot password email sent successfully')
+        }
+      })
+      .catch(function (error) {
+        console.log('forgot password error: ', error)
+      })
+  }
+}
