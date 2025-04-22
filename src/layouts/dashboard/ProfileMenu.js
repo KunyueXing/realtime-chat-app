@@ -3,12 +3,15 @@ import { Profile_Menu } from '../../data'
 import { Box, Stack, Avatar, Menu, MenuItem, Fade } from '@mui/material'
 import { faker } from '@faker-js/faker'
 import { useNavigate } from 'react-router-dom'
+import { useSelector, useDispatch } from 'react-redux'
+import { LogoutUser } from '../../redux/slices/auth'
 
 const ProfileMenu = () => {
   const [anchorEl, setAnchorEl] = useState(null)
   const openMenu = Boolean(anchorEl)
   const [selectedMenu, setSelectedMenu] = useState(null)
   const navigate = useNavigate()
+  const dispatch = useDispatch()
 
   // Handle click event on the avatar. When clicked, it opens the menu. Clicking again or outside the menu closes it.
   const handleClick = (event) => {
@@ -30,6 +33,10 @@ const ProfileMenu = () => {
     if (selectedMenu !== null && selectedMenu === 0) {
       // console.log('Navigating to /profile')
       navigate('/profile')
+    } else if (selectedMenu !== null && selectedMenu === 1) {
+      navigate('/settings')
+    } else if (selectedMenu !== null && selectedMenu === 2) {
+      dispatch(LogoutUser())
     }
   }, [selectedMenu, navigate])
 

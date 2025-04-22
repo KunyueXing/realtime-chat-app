@@ -52,4 +52,10 @@ export function LoginUser(formValues) {
       })
   }
 }
-export function LogoutUser() {}
+export function LogoutUser() {
+  return async (dispatch, getState) => {
+    window.localStorage.removeItem('user_id')
+    dispatch(authSlice.actions.logout())
+    console.log('logout')
+  }
+}
