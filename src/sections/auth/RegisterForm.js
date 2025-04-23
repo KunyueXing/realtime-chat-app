@@ -20,7 +20,12 @@ const AuthRegisterForm = () => {
       .min(6, 'The Password must have at least 6 digits')
       .max(20, 'The password must be <= 20 digits')
       .trim(),
-    username: Yup.string().required('A username is required').trim()
+    firstName: Yup.string().required('A first name is required').trim(),
+    lastName: Yup.string().required('A last name is required').trim(),
+    passwordConfirm: Yup.string()
+      .required('Password confirmation is required')
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .trim()
   })
 
   const defaultValues = {
@@ -62,11 +67,29 @@ const AuthRegisterForm = () => {
       <Stack spacing={3} mb={4}>
         {!!errors.afterSubmit && <Alert severity='error'>{errors.afterSubmit.message}</Alert>}
 
-        <FormTextField name='username' label='Username' />
+        <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <FormTextField name='firstName' label='First Name' />
+          <FormTextField name='lastName' label='Last Name' />
+        </Stack>
+
         <FormTextField name='email' label='Email address' />
         <FormTextField
           name={'password'}
           label='Password'
+          type={showPassword ? 'text' : 'password'}
+          InputProps={{
+            endAdornment: (
+              <InputAdornment position='end'>
+                <IconButton onClick={() => setShowPassword(!showPassword)} edge='end'>
+                  {showPassword ? <Eye /> : <EyeSlash />}
+                </IconButton>
+              </InputAdornment>
+            )
+          }}
+        />
+        <FormTextField
+          name={'passwordConfirm'}
+          label='Confirm Password'
           type={showPassword ? 'text' : 'password'}
           InputProps={{
             endAdornment: (
