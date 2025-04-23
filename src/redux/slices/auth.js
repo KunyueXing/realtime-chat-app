@@ -76,3 +76,21 @@ export function ForgotPassword(formValues) {
       })
   }
 }
+
+export function NewPassword(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .patch('/auth/resetPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+      .then(function (response) {
+        console.log('reset password response: ', response)
+        // Check if the response is successful
+        if (response.status === 200) {
+          dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
+          console.log('Password reset successfully')
+        }
+      })
+      .catch(function (error) {
+        console.log('reset password error: ', error)
+      })
+  }
+}

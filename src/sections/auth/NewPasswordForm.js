@@ -6,9 +6,14 @@ import { FormTextField, FormProvider } from '../../components/hook-form'
 import { LoadingButton } from '@mui/lab'
 import { Stack, InputAdornment, IconButton, Alert } from '@mui/material'
 import { Eye, EyeSlash } from 'phosphor-react'
+import { useDispatch } from 'react-redux'
+import { NewPassword } from '../../redux/slices/auth'
+import { useSearchParams } from 'react-router-dom'
 
 const AuthNewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
+  const [searchParams] = useSearchParams()
 
   const NewPasswordSchema = Yup.object().shape({
     password: Yup.string()
@@ -22,8 +27,8 @@ const AuthNewPasswordForm = () => {
   })
 
   const defaultValues = {
-    password: '***',
-    passwordConfirm: '***'
+    password: '',
+    passwordConfirm: ''
   }
 
   const methods = useForm({
@@ -44,6 +49,7 @@ const AuthNewPasswordForm = () => {
       console.log(data)
 
       // submit data to backend, placehold
+      dispatch(NewPassword({ ...data, token: searchParams.get('token') }))
     } catch (error) {
       console.error(error)
       reset()
