@@ -23,6 +23,9 @@ const authSlice = createSlice({
       state.isLoggedIn = false
       state.token = ''
       state.user_id = null
+    },
+    updateRegisterEmail: (state, action) => {
+      state.email = action.payload.email
     }
   }
 })
@@ -91,6 +94,49 @@ export function NewPassword(formValues) {
       })
       .catch(function (error) {
         console.log('reset password error: ', error)
+      })
+  }
+}
+
+export function RegisterUser(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .post('/auth/register', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+      .then(function (response) {
+        console.log('register response: ', response)
+        // Check if the response is successful
+        if (response.status === 200) {
+          console.log('User registered successfully')
+          dispatch(authSlice.actions.updateRegisterEmail({ email: formValues.email }))
+        }
+      })
+      .catch(function (error) {
+        console.log('register error: ', error)
+      })
+      .finally(() => {
+        if (!getState().auth.error) {
+          window.location.href = '/auth/verify'
+        }
+      })
+  }
+}
+
+export function VerifyUser(formValues) {
+  return async (dispatch, getState) => {
+    await axios
+      .post('/auth/verify', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+      .then(function (response) {
+        console.log('verify response: ', response)
+        // Check if the response is successful
+        if (response.status === 200) {
+          console.log('User verified successfully')
+          dispatch(authSlice.actions.updateRegisterEmail({ email: '' }))
+          window.localStorage.setItem('user_id', response.data.user_id)
+          dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
+        }
+      })
+      .catch(function (error) {
+        console.log('verify error: ', error)
       })
   }
 }

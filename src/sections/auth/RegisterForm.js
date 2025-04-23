@@ -6,9 +6,12 @@ import { Stack, Alert, InputAdornment, IconButton } from '@mui/material'
 import { FormTextField, FormProvider } from '../../components/hook-form'
 import { Eye, EyeSlash } from 'phosphor-react'
 import { LoadingButton } from '@mui/lab'
+import { useDispatch } from 'react-redux'
+import { RegisterUser } from '../../redux/slices/auth'
 
 const AuthRegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false)
+  const dispatch = useDispatch()
 
   const RegisterSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email must be a valid email address').trim(),
@@ -43,6 +46,7 @@ const AuthRegisterForm = () => {
       console.log(data)
 
       // submit data to backend, placehold
+      dispatch(RegisterUser(data))
     } catch (error) {
       console.error(error)
       reset()
