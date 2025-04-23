@@ -1,5 +1,6 @@
 import { Stack, Typography } from '@mui/material'
 import React from 'react'
+import VerifyForm from '../../sections/auth/VerifyForm'
 
 export default function Verify() {
   return (
@@ -10,8 +11,9 @@ export default function Verify() {
         <Stack direction='row' spacing={0.5}>
           <Typography variant='body2'>Sent to your registration email</Typography>
         </Stack>
-        {/* Form */}
       </Stack>
+      {/* Form */}
+      <VerifyForm />
     </>
   )
 }
