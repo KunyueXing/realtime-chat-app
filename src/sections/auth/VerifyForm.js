@@ -5,11 +5,12 @@ import { yupResolver } from '@hookform/resolvers/yup'
 import { useForm } from 'react-hook-form'
 import { Stack } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { VerifyUser } from '../../redux/slices/auth'
 
 export default function VerifyForm() {
   const dispatch = useDispatch()
+  const { email } = useSelector((state) => state.auth)
 
   const VerifyCodeSchema = Yup.object().shape({
     code: Yup.string()
@@ -34,7 +35,7 @@ export default function VerifyForm() {
     try {
       console.log(data)
       // submit data to backend, placeholder
-      dispatch(VerifyUser(data))
+      dispatch(VerifyUser({ email, otp: data.code }))
     } catch (error) {
       console.error(error)
     }
