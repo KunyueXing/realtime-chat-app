@@ -4,6 +4,8 @@ import axios from '../../utils/axios'
 const initialState = {
   isLoggedIn: false,
   token: '',
+  // To track whether an async operation (like API call) is in progress
+  // helps to show loading indicators, disable a form while waiting for a response, etc.
   isLoading: false,
   error: null,
   user_id: null,
@@ -26,7 +28,11 @@ const authSlice = createSlice({
     },
     updateRegisterEmail: (state, action) => {
       state.email = action.payload.email
-    }
+    },
+    updateIsLoading: (state, action) => {
+      state.isLoading = action.payload.isLoading
+      state.error = action.payload.error
+    },
   }
 })
 
@@ -36,6 +42,8 @@ export default authReducer
 export function LoginUser(formValues) {
   // formValues is an object with email and password
   return async (dispatch, getState) => {
+    dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
+
     //API call
     await axios
       .post('/auth/login', { ...formValues }, { headers: { 'content-type': 'application/json' } })
@@ -45,6 +53,7 @@ export function LoginUser(formValues) {
         if (response.status === 200) {
           const { token, user_id } = response.data
           dispatch(authSlice.actions.login({ isLoggedIn: true, token, user_id }))
+          dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
 
           window.localStorage.setItem('user_id', user_id)
         }
@@ -52,6 +61,7 @@ export function LoginUser(formValues) {
       .catch(function (error) {
         console.log('login error: ', error)
         dispatch(authSlice.actions.logout())
+        dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
       })
   }
 }
@@ -65,6 +75,8 @@ export function LogoutUser() {
 
 export function ForgotPassword(formValues) {
   return async (dispatch, getState) => {
+    dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
+
     await axios
       .post('/auth/forgotPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
       .then(function (response) {
@@ -72,16 +84,20 @@ export function ForgotPassword(formValues) {
         // Check if the response is successful
         if (response.status === 200) {
           console.log('Forgot password email sent successfully')
+          dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
         }
       })
       .catch(function (error) {
         console.log('forgot password error: ', error)
+        dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
       })
   }
 }
 
 export function NewPassword(formValues) {
   return async (dispatch, getState) => {
+    dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
+
     await axios
       .patch('/auth/resetPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
       .then(function (response) {
@@ -89,17 +105,21 @@ export function NewPassword(formValues) {
         // Check if the response is successful
         if (response.status === 200) {
           dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
+          dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
           console.log('Password reset successfully')
         }
       })
       .catch(function (error) {
         console.log('reset password error: ', error)
+        dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
       })
   }
 }
 
 export function RegisterUser(formValues) {
   return async (dispatch, getState) => {
+    dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
+
     await axios
       .post('/auth/register', { ...formValues }, { headers: { 'content-type': 'application/json' } })
       .then(function (response) {
@@ -108,10 +128,12 @@ export function RegisterUser(formValues) {
         if (response.status === 200) {
           console.log('User registered successfully')
           dispatch(authSlice.actions.updateRegisterEmail({ email: formValues.email }))
+          dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
         }
       })
       .catch(function (error) {
         console.log('register error: ', error)
+        dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
       })
       .finally(() => {
         if (!getState().auth.error) {
@@ -123,6 +145,8 @@ export function RegisterUser(formValues) {
 
 export function VerifyUser(formValues) {
   return async (dispatch, getState) => {
+    dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
+
     await axios
       .post('/auth/verify', { ...formValues }, { headers: { 'content-type': 'application/json' } })
       .then(function (response) {
@@ -133,10 +157,12 @@ export function VerifyUser(formValues) {
           dispatch(authSlice.actions.updateRegisterEmail({ email: '' }))
           window.localStorage.setItem('user_id', response.data.user_id)
           dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
+          dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
         }
       })
       .catch(function (error) {
         console.log('verify error: ', error)
+        dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
       })
   }
 }
