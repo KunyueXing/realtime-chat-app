@@ -24,8 +24,8 @@ const AuthLoginForm = () => {
   })
 
   const defaultValues = {
-    email: 'demo@gmail.com',
-    password: 'demo1234'
+    email: '',
+    password: ''
   }
 
   /*

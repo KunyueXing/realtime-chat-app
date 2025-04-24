@@ -15,7 +15,7 @@ const AuthResetPasswordForm = () => {
 
   const methods = useForm({
     resolver: yupResolver(ResetPasswordSchema),
-    defaultValues: { email: 'demo@gmail.com' }
+    defaultValues: { email: '' }
   })
 
   const { handleSubmit } = methods

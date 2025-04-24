@@ -29,9 +29,11 @@ const AuthRegisterForm = () => {
   })
 
   const defaultValues = {
-    email: 'demo@gmail.com',
-    password: 'demo1234',
-    username: 'Jenny'
+    email: '',
+    password: '',
+    firstName: '',
+    lastName: '',
+    passwordConfirm: ''
   }
 
   const methods = useForm({
