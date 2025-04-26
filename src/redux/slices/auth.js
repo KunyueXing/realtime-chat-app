@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from '../../utils/axios'
+import { OpenSnackBar } from './app'
 
 const initialState = {
   isLoggedIn: false,
@@ -32,7 +33,7 @@ const authSlice = createSlice({
     updateIsLoading: (state, action) => {
       state.isLoading = action.payload.isLoading
       state.error = action.payload.error
-    },
+    }
   }
 })
 
@@ -54,14 +55,17 @@ export function LoginUser(formValues) {
           const { token, user_id } = response.data
           dispatch(authSlice.actions.login({ isLoggedIn: true, token, user_id }))
           dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
+          dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
 
           window.localStorage.setItem('user_id', user_id)
+          window.location.href = '/app'
         }
       })
       .catch(function (error) {
         console.log('login error: ', error)
         dispatch(authSlice.actions.logout())
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
+        dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
   }
 }
@@ -85,11 +89,13 @@ export function ForgotPassword(formValues) {
         if (response.status === 200) {
           console.log('Forgot password email sent successfully')
           dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
+          dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
         }
       })
       .catch(function (error) {
         console.log('forgot password error: ', error)
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
+        dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
   }
 }
@@ -106,12 +112,14 @@ export function NewPassword(formValues) {
         if (response.status === 200) {
           dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
           dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
+          dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
           console.log('Password reset successfully')
         }
       })
       .catch(function (error) {
         console.log('reset password error: ', error)
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
+        dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
   }
 }
@@ -129,11 +137,13 @@ export function RegisterUser(formValues) {
           console.log('User registered successfully')
           dispatch(authSlice.actions.updateRegisterEmail({ email: formValues.email }))
           dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
+          dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
         }
       })
       .catch(function (error) {
         console.log('register error: ', error)
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
+        dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
       .finally(() => {
         if (!getState().auth.error) {
@@ -158,11 +168,13 @@ export function VerifyUser(formValues) {
           window.localStorage.setItem('user_id', response.data.user_id)
           dispatch(authSlice.actions.login({ isLoggedIn: true, token: response.data.token }))
           dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: false }))
+          dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
         }
       })
       .catch(function (error) {
         console.log('verify error: ', error)
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
+        dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
   }
 }
