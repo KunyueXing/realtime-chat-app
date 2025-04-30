@@ -40,7 +40,7 @@ const authSlice = createSlice({
 const authReducer = authSlice.reducer
 export default authReducer
 
-export function LoginUser(formValues) {
+export function LoginUser(formValues, navigate) {
   // formValues is an object with email and password
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
@@ -58,7 +58,6 @@ export function LoginUser(formValues) {
           dispatch(OpenSnackBar({ severity: 'success', message: response.data.message }))
 
           window.localStorage.setItem('user_id', user_id)
-          window.location.href = '/app'
         }
       })
       .catch(function (error) {
@@ -67,6 +66,13 @@ export function LoginUser(formValues) {
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
         dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
+      .finally(() => {
+        if (!getState().auth.error && navigate) {
+          setTimeout(() => {
+            navigate('/app')
+          }, 800)
+        }
+      })
   }
 }
 export function LogoutUser() {
@@ -74,6 +80,7 @@ export function LogoutUser() {
     window.localStorage.removeItem('user_id')
     dispatch(authSlice.actions.logout())
     console.log('logout')
+    dispatch(OpenSnackBar({ severity: 'success', message: 'Logged out successfully' }))
   }
 }
 

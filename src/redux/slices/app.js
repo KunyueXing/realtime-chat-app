@@ -9,7 +9,7 @@ const initialState = {
   isLoggedIn: true,
   tab: 0, // [0, 1, 2, 3] refers to navigation bar - chats, people, phone, and settings
   snackbar: {
-    open: null,
+    open: false,
     severity: null,
     message: null
   },
@@ -45,13 +45,13 @@ const slice = createSlice({
       state.sideBar.type = action.payload.type
     },
     openSnackBar(state, action) {
-      console.log(action.payload)
+      console.log('open snackbar in slice action:', action.payload)
       state.snackbar.open = true
       state.snackbar.severity = action.payload.severity
       state.snackbar.message = action.payload.message
     },
     closeSnackBar(state) {
-      console.log('This is getting executed')
+      console.log('close snackbar in slice action')
       state.snackbar.open = false
       state.snackbar.severity = null
       state.snackbar.message = null
@@ -79,13 +79,13 @@ export function UpdateSidebarType(type) {
   }
 }
 
-export function OpenSnackBar(severity, message) {
+export function OpenSnackBar({ severity, message }) {
   return async (dispatch, getState) => {
     dispatch(slice.actions.openSnackBar({ severity, message }))
 
     setTimeout(() => {
       dispatch(slice.actions.closeSnackBar())
-    }, 4000)
+    }, 6000)
   }
 }
 
