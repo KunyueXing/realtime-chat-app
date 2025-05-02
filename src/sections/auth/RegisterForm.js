@@ -8,10 +8,12 @@ import { Eye, EyeSlash } from 'phosphor-react'
 import { LoadingButton } from '@mui/lab'
 import { useDispatch } from 'react-redux'
 import { RegisterUser } from '../../redux/slices/auth'
+import { useNavigate } from 'react-router-dom'
 
 const AuthRegisterForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
+  const navigate = useNavigate()
 
   const RegisterSchema = Yup.object().shape({
     email: Yup.string().required('Email is required').email('Email must be a valid email address').trim(),
@@ -53,7 +55,7 @@ const AuthRegisterForm = () => {
       console.log(data)
 
       // submit data to backend, placehold
-      dispatch(RegisterUser(data))
+      dispatch(RegisterUser(data, navigate))
     } catch (error) {
       console.error(error)
       reset()

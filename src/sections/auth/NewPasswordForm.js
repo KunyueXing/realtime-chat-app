@@ -8,12 +8,13 @@ import { Stack, InputAdornment, IconButton, Alert } from '@mui/material'
 import { Eye, EyeSlash } from 'phosphor-react'
 import { useDispatch } from 'react-redux'
 import { NewPassword } from '../../redux/slices/auth'
-import { useSearchParams } from 'react-router-dom'
+import { useSearchParams, useNavigate } from 'react-router-dom'
 
 const AuthNewPasswordForm = () => {
   const [showPassword, setShowPassword] = useState(false)
   const dispatch = useDispatch()
   const [searchParams] = useSearchParams()
+  const navigate = useNavigate()
 
   const NewPasswordSchema = Yup.object().shape({
     password: Yup.string()
@@ -49,7 +50,7 @@ const AuthNewPasswordForm = () => {
       console.log(data)
 
       // submit data to backend, placehold
-      dispatch(NewPassword({ ...data, token: searchParams.get('token') }))
+      dispatch(NewPassword({ ...data, token: searchParams.get('token') }, navigate))
     } catch (error) {
       console.error(error)
       reset()

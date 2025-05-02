@@ -107,7 +107,7 @@ export function ForgotPassword(formValues) {
   }
 }
 
-export function NewPassword(formValues) {
+export function NewPassword(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
@@ -128,10 +128,17 @@ export function NewPassword(formValues) {
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
         dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
+      .finally(() => {
+        if (!getState().auth.error && navigate) {
+          setTimeout(() => {
+            navigate('/app')
+          }, 800)
+        }
+      })
   }
 }
 
-export function RegisterUser(formValues) {
+export function RegisterUser(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
@@ -153,14 +160,17 @@ export function RegisterUser(formValues) {
         dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
       })
       .finally(() => {
-        if (!getState().auth.error) {
-          window.location.href = '/auth/verify'
+        if (!getState().auth.error && navigate) {
+          setTimeout(() => {
+            navigate('/auth/verify')
+          }, 800)
+          // window.location.href = '/auth/verify'
         }
       })
   }
 }
 
-export function VerifyUser(formValues) {
+export function VerifyUser(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
@@ -182,6 +192,13 @@ export function VerifyUser(formValues) {
         console.log('verify error: ', error)
         dispatch(authSlice.actions.updateIsLoading({ isLoading: false, error: true }))
         dispatch(OpenSnackBar({ severity: 'error', message: error.message }))
+      })
+      .finally(() => {
+        if (!getState().auth.error && navigate) {
+          setTimeout(() => {
+            navigate('/app')
+          }, 800)
+        }
       })
   }
 }

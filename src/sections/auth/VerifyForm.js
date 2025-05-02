@@ -7,10 +7,12 @@ import { Stack } from '@mui/material'
 import { LoadingButton } from '@mui/lab'
 import { useDispatch, useSelector } from 'react-redux'
 import { VerifyUser } from '../../redux/slices/auth'
+import { useNavigate } from 'react-router-dom'
 
 export default function VerifyForm() {
   const dispatch = useDispatch()
   const { email } = useSelector((state) => state.auth)
+  const navigate = useNavigate()
 
   const VerifyCodeSchema = Yup.object().shape({
     code: Yup.string()
@@ -35,7 +37,7 @@ export default function VerifyForm() {
     try {
       console.log(data)
       // submit data to backend, placeholder
-      dispatch(VerifyUser({ email, otp: data.code }))
+      dispatch(VerifyUser({ email, otp: data.code }, navigate))
     } catch (error) {
       console.error(error)
     }
