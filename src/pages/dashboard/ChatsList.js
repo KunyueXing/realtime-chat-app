@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Box, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { Circle, Users, MagnifyingGlass } from 'phosphor-react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
@@ -6,10 +6,19 @@ import { useTheme } from '@mui/material/styles'
 import { SimpleBarStyle } from '../../components/Scrollbar'
 import ChatElement from '../../components/ChatElement'
 import { ChatList } from '../../data'
+import Friends from '../../sections/Dashboard/friends'
 
 const ChatsList = () => {
   const theme = useTheme()
-  console.log('Rendering ChatsList component')
+  // console.log('Rendering ChatsList component')
+  const [openDialog, setOpenDialog] = useState(false)
+
+  const handleDialogOpen = () => {
+    setOpenDialog(true)
+  }
+  const handleDialogClose = () => {
+    setOpenDialog(false)
+  }
 
   return (
     <>
@@ -26,7 +35,7 @@ const ChatsList = () => {
           <Stack sx={{ alignItems: 'center', justifyContent: 'space-between' }} direction='row'>
             <Typography variant='h4'>Chats</Typography>
             <Stack direction='row' sx={{ alignItems: 'center' }} spacing={1}>
-              <IconButton sx={{ width: 'auto' }}>
+              <IconButton sx={{ width: 'auto' }} onClick={handleDialogOpen}>
                 <Users />
               </IconButton>
               <IconButton sx={{ width: 'auto' }}>
@@ -65,6 +74,7 @@ const ChatsList = () => {
           </Stack>
         </Stack>
       </Box>
+      {openDialog && <Friends open={openDialog} handleClose={handleDialogClose} />}
     </>
   )
 }
