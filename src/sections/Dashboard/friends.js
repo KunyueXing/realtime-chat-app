@@ -1,10 +1,32 @@
 import { Dialog, DialogContent, Slide, Tab, Tabs, Stack } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
+import { useDispatch, useSelector } from 'react-redux'
+import { FetchFriendRequests, FetchFriends, FetchUsers } from '../../redux/slices/app'
+import { UserElement } from '../../components/UserElement'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
+
+const UserList = () => {
+  const dispatch = useDispatch()
+  const { users } = useSelector((state) => state.app)
+
+  useEffect(() => {
+    dispatch(FetchUsers())
+  }, [dispatch])
+
+  return (
+    <>
+      {Array.isArray(users) &&
+        users.map((el, idx) => {
+          // console.log('el:', el)
+          return <UserElement key={idx} {...el} />
+        })}
+    </>
+  )
+}
 
 const Friends = ({ open, handleClose }) => {
   const [value, setValue] = useState(0)
@@ -37,7 +59,7 @@ const Friends = ({ open, handleClose }) => {
             {(() => {
               switch (value) {
                 case 0:
-                  return <div>Explore Content</div>
+                  return <UserList />
                 case 1:
                   return <div>Friends Content</div>
                 case 2:
