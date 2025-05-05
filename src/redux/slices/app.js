@@ -116,7 +116,7 @@ export function FetchUsers(users) {
       })
       .then((response) => {
         console.log('response:', response)
-        dispatch(slice.actions.updateUsers({ users: response.data }))
+        dispatch(slice.actions.updateUsers({ users: response.data.users }))
       })
       .catch((error) => {
         console.log('error:', error)
@@ -136,7 +136,7 @@ export function FetchFriends() {
       })
       .then((response) => {
         console.log('response:', response)
-        dispatch(slice.actions.updateFriends({ friends: response.data }))
+        dispatch(slice.actions.updateFriends({ friends: response.data.users }))
       })
       .catch((error) => {
         console.log('error:', error)
@@ -156,7 +156,7 @@ export function FetchFriendRequests() {
       })
       .then((response) => {
         console.log('response:', response)
-        dispatch(slice.actions.updateFriendRequests({ friendRequests: response.data }))
+        dispatch(slice.actions.updateFriendRequests({ friendRequests: response.data.users }))
       })
       .catch((error) => {
         console.log('error:', error)
