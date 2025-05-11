@@ -3,9 +3,11 @@ import io from 'socket.io-client'
 let socket
 const connectSocket = (user_id) => {
   socket = io('http://localhost:8000', {
-    query: `user_id=${user_id}`
+    query: {
+      user_id
+    }
   })
-  socket.connect()
+
   return socket
 }
 const disconnectSocket = () => {
@@ -13,9 +15,9 @@ const disconnectSocket = () => {
     socket.disconnect()
   }
 }
-const getSocket = () => {
+const getSocket = (user_id) => {
   if (!socket) {
-    socket = connectSocket()
+    socket = connectSocket(user_id)
   }
   return socket
 }

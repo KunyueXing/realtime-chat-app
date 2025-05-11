@@ -5,12 +5,15 @@ import { getSocket } from '../../socket'
 
 const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
   const dispatch = useDispatch()
-  const socket = getSocket()
 
   useEffect(() => {
-    if (!isLoggedIn || !socket) {
+    if (!isLoggedIn || !user_id) {
       return
     }
+
+    console.log('useDashboardSocketHandlers user_id:', user_id)
+    const socket = getSocket(user_id)
+    console.log('useDashboardSocketHandlers socket:', socket)
 
     // Friend request handlers
     socket.on('new_friend_request', (data) => {
@@ -52,7 +55,7 @@ const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
       socket?.off('friend_request_accepted')
       socket?.off('friend_request_sent')
     }
-  }, [socket, isLoggedIn, dispatch, user_id])
+  }, [isLoggedIn, dispatch, user_id])
 }
 
 export default useDashboardSocketHandlers

@@ -7,7 +7,8 @@ import useDashboardSocketHandlers from '../../hooks/socket-events/useDashboardSo
 
 const DashboardLayout = () => {
   const { isLoggedIn } = useSelector((state) => state.auth)
-  const { user_id } = useSelector((state) => state.auth.user_id)
+  const user_id = useSelector((state) => state.auth.user_id)
+  console.log('layout/dashboard user_id:', user_id)
 
   if (!isLoggedIn) {
     return <Navigate to={'/auth/login'} />

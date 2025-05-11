@@ -4,6 +4,12 @@ import { useTheme } from '@mui/material/styles'
 import { Avatar, Button, IconButton, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { Chat } from 'phosphor-react'
+import { getSocket } from '../socket'
+
+const user_id = window.localStorage.getItem('user_id')
+console.log('components/userelement user_id:', user_id)
+const socket = getSocket(user_id)
+console.log('components/userelement socket:', socket)
 
 const UserElement = ({ firstName, lastName, online, _id, img }) => {
   const theme = useTheme()
@@ -32,7 +38,16 @@ const UserElement = ({ firstName, lastName, online, _id, img }) => {
           </Stack>
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
-          <Button>Send Request</Button>
+          <Button
+            onClick={() => {
+              console.log('Emitting friend_request event', { sender: user_id, receiver: _id })
+              socket.emit('friend_request', { sender: user_id, receiver: _id }, () => {
+                alert('Friend request sent')
+              })
+            }}
+          >
+            Send Request
+          </Button>
         </Stack>
       </Stack>
     </StyledChatBox>
