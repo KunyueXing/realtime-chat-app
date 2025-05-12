@@ -89,6 +89,7 @@ const FriendElement = ({ img, firstName, lastName, online, _id }) => {
           </Stack>
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
+          {/* TODO: add start chat functionality using socket */}
           <IconButton>
             <Chat />
           </IconButton>
@@ -106,9 +107,9 @@ FriendElement.propTypes = {
   img: PropTypes.string
 }
 
-const FriendRequestElement = ({ img, firstName, lastName, online, _id }) => {
+const FriendRequestElement = ({ img, sender, online, _id }) => {
   const theme = useTheme()
-  const name = `${firstName} ${lastName}`
+  const name = `${sender.firstName} ${sender.lastName}`
 
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
@@ -133,8 +134,20 @@ const FriendRequestElement = ({ img, firstName, lastName, online, _id }) => {
           </Stack>
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
-          <Button>Accept</Button>
-          <Button>Reject</Button>
+          <Button
+            onClick={() => {
+              socket.emit('accept_friend_request', { request_id: _id })
+            }}
+          >
+            Accept
+          </Button>
+          <Button
+            onClick={() => {
+              socket.emit('reject_friend_request', { request_id: _id })
+            }}
+          >
+            Reject
+          </Button>
         </Stack>
       </Stack>
     </StyledChatBox>
@@ -142,8 +155,10 @@ const FriendRequestElement = ({ img, firstName, lastName, online, _id }) => {
 }
 
 FriendRequestElement.propTypes = {
-  firstName: PropTypes.string,
-  lastName: PropTypes.string,
+  sender: PropTypes.shape({
+    firstName: PropTypes.string,
+    lastName: PropTypes.string
+  }),
   online: PropTypes.bool,
   _id: PropTypes.string,
   img: PropTypes.string
