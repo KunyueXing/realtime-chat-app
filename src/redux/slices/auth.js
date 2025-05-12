@@ -1,6 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
 import axios from '../../utils/axios'
 import { OpenSnackBar } from './app'
+import { disconnectSocket } from '../../socket'
 
 const initialState = {
   isLoggedIn: false,
@@ -77,6 +78,9 @@ export function LoginUser(formValues, navigate) {
 }
 export function LogoutUser() {
   return async (dispatch, getState) => {
+    // Disconnect the socket
+    disconnectSocket()
+
     window.localStorage.removeItem('user_id')
     dispatch(authSlice.actions.logout())
     console.log('logout')

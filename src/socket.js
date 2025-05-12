@@ -5,7 +5,8 @@ const connectSocket = (user_id) => {
   socket = io('http://localhost:8000', {
     query: {
       user_id
-    }
+    },
+    transports: ['websocket']
   })
 
   return socket
@@ -13,6 +14,7 @@ const connectSocket = (user_id) => {
 const disconnectSocket = () => {
   if (socket) {
     socket.disconnect()
+    socket = null
   }
 }
 const getSocket = (user_id) => {
