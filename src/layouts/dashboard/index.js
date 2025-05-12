@@ -10,12 +10,12 @@ const DashboardLayout = () => {
   const user_id = useSelector((state) => state.auth.user_id)
   console.log('layout/dashboard user_id:', user_id)
 
+  // Handle socket events of audio/video calls, new messages, start chat, and friend requests
+  useDashboardSocketHandlers({ user_id, isLoggedIn })
+
   if (!isLoggedIn) {
     return <Navigate to={'/auth/login'} />
   }
-
-  // Handle socket events of audio/video calls, new messages, start chat, and friend requests
-  useDashboardSocketHandlers({ user_id, isLoggedIn })
 
   return (
     <>
