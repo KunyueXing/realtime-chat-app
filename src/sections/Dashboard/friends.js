@@ -58,7 +58,7 @@ const FriendRequest = () => {
     <>
       {Array.isArray(friendRequests) &&
         friendRequests.map((el, idx) => {
-          return <FriendRequestElement key={idx} {...el} />
+          return <FriendRequestElement key={idx} {...el.sender} id={el._id} />
         })}
     </>
   )

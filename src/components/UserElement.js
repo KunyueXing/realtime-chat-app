@@ -107,9 +107,9 @@ FriendElement.propTypes = {
   img: PropTypes.string
 }
 
-const FriendRequestElement = ({ img, sender, online, _id }) => {
+const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
   const theme = useTheme()
-  const name = `${sender.firstName} ${sender.lastName}`
+  const name = `${firstName} ${lastName}`
 
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
@@ -136,14 +136,14 @@ const FriendRequestElement = ({ img, sender, online, _id }) => {
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
           <Button
             onClick={() => {
-              socket.emit('accept_friend_request', { request_id: _id })
+              socket.emit('accept_friend_request', { request_id: id })
             }}
           >
             Accept
           </Button>
           <Button
             onClick={() => {
-              socket.emit('reject_friend_request', { request_id: _id })
+              socket.emit('reject_friend_request', { request_id: id })
             }}
           >
             Reject
@@ -155,12 +155,10 @@ const FriendRequestElement = ({ img, sender, online, _id }) => {
 }
 
 FriendRequestElement.propTypes = {
-  sender: PropTypes.shape({
-    firstName: PropTypes.string,
-    lastName: PropTypes.string
-  }),
+  firstName: PropTypes.string,
+  lastName: PropTypes.string,
   online: PropTypes.bool,
-  _id: PropTypes.string,
+  id: PropTypes.string,
   img: PropTypes.string
 }
 
