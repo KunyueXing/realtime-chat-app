@@ -7,7 +7,6 @@ const initialState = {
     open: false,
     type: 'CONTACT' // can be CONTACT, STARRED, SHARED
   },
-  isLoggedIn: true,
   tab: 0, // [0, 1, 2, 3] refers to navigation bar - chats, people, phone, and settings
   snackbar: {
     open: false,
@@ -18,8 +17,8 @@ const initialState = {
   all_users: [],
   friends: [], // all friends
   friendRequests: [], // all friend requests
-  chat_type: null,
-  room_id: null,
+  chat_type: null, // can be individual or group
+  room_id: null, // room id of the chat
   call_logs: []
 }
 
@@ -65,7 +64,12 @@ const slice = createSlice({
     },
     updateFriendRequests(state, action) {
       state.friendRequests = action.payload.friendRequests
-    }
+    },
+    selectConversation(state, action) {
+      state.chat_type = action.payload.chat_type
+      state.room_id = action.payload.room_id
+    },
+    resetApp: () => initialState
   }
 })
 
@@ -162,5 +166,17 @@ export function FetchFriendRequests() {
         console.log('error:', error)
         dispatch(slice.actions.openSnackBar({ severity: 'error', message: 'Error fetching friend requests' }))
       })
+  }
+}
+
+export function SelectConversation({ chat_type, room_id }) {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.selectConversation({ chat_type, room_id }))
+  }
+}
+
+export function ResetApp() {
+  return async (dispatch, getState) => {
+    dispatch(slice.actions.resetApp())
   }
 }
