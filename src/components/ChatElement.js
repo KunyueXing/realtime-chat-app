@@ -5,9 +5,12 @@ import StyledBadge from './StyledBadge'
 import PropTypes from 'prop-types'
 import truncateString from '../utils/truncateString'
 import { StyledChatBox } from './StyledBadge'
+import { useDispatch } from 'react-redux'
+import { SelectConversation } from '../redux/slices/app'
 
-const ChatElement = ({ img, name, msg, time, unread }) => {
+const ChatElement = ({ img, name, msg, time, unread, chat_type, id }) => {
   const theme = useTheme()
+  const dispatch = useDispatch()
 
   return (
     <StyledChatBox
@@ -17,6 +20,9 @@ const ChatElement = ({ img, name, msg, time, unread }) => {
         bgcolor: theme.palette.mode === 'light' ? '#fff' : theme.palette.background.default
       }}
       p={2}
+      onClick={() => {
+        dispatch(SelectConversation({ chat_type, room_id: id }))
+      }}
     >
       <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <Stack direction='row' spacing={2}>
@@ -44,7 +50,9 @@ ChatElement.propTypes = {
   name: PropTypes.string.isRequired,
   msg: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  unread: PropTypes.number.isRequired
+  unread: PropTypes.number.isRequired,
+  chat_type: PropTypes.string.isRequired,
+  id: PropTypes.string
 }
 
 export default ChatElement

@@ -62,14 +62,14 @@ const Group = () => {
                   </Typography>
                   {/* <ChatElement /> */}
                   {ChatList.filter((ele) => ele.pinned).map((ele) => {
-                    return <ChatElement {...ele} key={`chat-${ele.id}`} />
+                    return <ChatElement {...ele} chat_type={'group'} key={`chat-${ele.id}`} />
                   })}
                   <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                     All Groups
                   </Typography>
                   {/* <ChatElement /> */}
                   {ChatList.filter((ele) => !ele.pinned).map((ele) => {
-                    return <ChatElement {...ele} key={`chat2-${ele.id}`} />
+                    return <ChatElement {...ele} chat_type={'group'} key={`chat2-${ele.id}`} />
                   })}
                 </Stack>
               </SimpleBarStyle>
