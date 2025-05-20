@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { Box, Divider, IconButton, Stack, Typography } from '@mui/material'
 import { Circle, Users, MagnifyingGlass } from 'phosphor-react'
 import { Search, SearchIconWrapper, StyledInputBase } from '../../components/Search'
@@ -7,10 +7,29 @@ import { SimpleBarStyle } from '../../components/Scrollbar'
 import ChatElement from '../../components/ChatElement'
 import { ChatList } from '../../data'
 import Friends from '../../sections/Dashboard/friends'
+import { useDispatch, useSelector } from 'react-redux'
+import { getSocket } from '../../socket'
+import { FetchDirectMessages } from '../../redux/slices/conversation'
 
 const ChatsList = () => {
   const theme = useTheme()
   // console.log('Rendering ChatsList component')
+  const dispatch = useDispatch()
+  const user_id = useSelector((state) => state.auth.user_id)
+  const socket = getSocket(user_id)
+
+  useEffect(() => {
+    socket.emit('get_direct_messages', { user_id }, (response) => {
+      if (response.status === 'success') {
+        // response.data contains the list of conversations
+        console.log('Direct messages:', response.data)
+        dispatch(FetchDirectMessages({ conversations: response.data, user_id }))
+      } else {
+        console.error('Error fetching direct messages:', response.message)
+      }
+    })
+  }, [user_id])
+
   const [openDialog, setOpenDialog] = useState(false)
 
   const handleDialogOpen = () => {
