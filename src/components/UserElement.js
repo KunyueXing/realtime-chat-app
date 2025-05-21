@@ -90,7 +90,9 @@ const FriendElement = ({ img, firstName, lastName, online, _id }) => {
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
           {/* TODO: add start chat functionality using socket */}
-          <IconButton>
+          <IconButton
+            onClick={() => { socket.emit('start_conversation', { sender: user_id, receiver: _id }) }}
+          >
             <Chat />
           </IconButton>
         </Stack>
