@@ -7,8 +7,9 @@ import truncateString from '../utils/truncateString'
 import { StyledChatBox } from './StyledBadge'
 import { useDispatch } from 'react-redux'
 import { SelectConversation } from '../redux/slices/app'
+import { tr } from '@faker-js/faker'
 
-const ChatElement = ({ img, name, msg, time, unread, chat_type, id }) => {
+const ChatElement = ({ img, name, msg, time, unread, chat_type, id, online, file }) => {
   const theme = useTheme()
   const dispatch = useDispatch()
 
@@ -31,7 +32,10 @@ const ChatElement = ({ img, name, msg, time, unread, chat_type, id }) => {
           </StyledBadge>
           <Stack spacing={0.3}>
             <Typography variant='subtitle2'>{name}</Typography>
-            <Typography variant='caption'>{truncateString(msg, 20)}</Typography>
+            <Typography variant='caption' sx={{ color: theme.palette.text.secondary }}>
+              {file && '[media]'}
+              {!file && msg && truncateString(msg, 20)}
+            </Typography>
           </Stack>
         </Stack>
         <Stack spacing={2} sx={{ alignItems: 'center' }}>
@@ -46,13 +50,15 @@ const ChatElement = ({ img, name, msg, time, unread, chat_type, id }) => {
 }
 
 ChatElement.propTypes = {
-  img: PropTypes.string.isRequired,
+  img: PropTypes.string,
   name: PropTypes.string.isRequired,
-  msg: PropTypes.string.isRequired,
+  msg: PropTypes.string,
   time: PropTypes.string.isRequired,
   unread: PropTypes.number.isRequired,
   chat_type: PropTypes.string.isRequired,
-  id: PropTypes.string
+  id: PropTypes.string,
+  online: PropTypes.bool,
+  file: PropTypes.string
 }
 
 export default ChatElement
