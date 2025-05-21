@@ -27,9 +27,13 @@ const ChatElement = ({ img, name, msg, time, unread, chat_type, id, online, file
     >
       <Stack direction='row' sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
         <Stack direction='row' spacing={2}>
-          <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
+          {online ? (
+            <StyledBadge overlap='circular' anchorOrigin={{ vertical: 'bottom', horizontal: 'right' }} variant='dot'>
+              <Avatar src={img} alt={name} />
+            </StyledBadge>
+          ) : (
             <Avatar src={img} alt={name} />
-          </StyledBadge>
+          )}
           <Stack spacing={0.3}>
             <Typography variant='subtitle2'>{name}</Typography>
             <Typography variant='caption' sx={{ color: theme.palette.text.secondary }}>
