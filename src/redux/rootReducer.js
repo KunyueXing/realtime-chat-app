@@ -3,6 +3,7 @@ import storage from 'redux-persist/lib/storage'
 // slices
 import appReducer from './slices/app'
 import authReducer from './slices/auth'
+import conversationReducer from './slices/conversation'
 
 /*
   A configuration for redux-persist, which specifies how and where the Redux state should be persisted.
@@ -21,7 +22,8 @@ const rootPersistConfig = {
 const rootReducer = combineReducers({
   // placeholders for appReducer, authReducer, conversationReducer, autioCallReducer, VideoCallreducer
   app: appReducer,
-  auth: authReducer
+  auth: authReducer,
+  conversation: conversationReducer
 })
 
 export { rootPersistConfig, rootReducer }

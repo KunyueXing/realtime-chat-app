@@ -43,8 +43,8 @@ const conversationSlice = createSlice({
     }
   }
 })
-
-export default conversationSlice.reducer
+const conversationReducer = conversationSlice.reducer
+export default conversationReducer
 
 export const FetchDirectMessages = ({ conversations, user_id }) => {
   return async (dispatch, getState) => {

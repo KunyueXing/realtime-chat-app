@@ -17,6 +17,7 @@ const ChatsList = () => {
   const dispatch = useDispatch()
   const user_id = useSelector((state) => state.auth.user_id)
   const socket = getSocket(user_id)
+  const { conversations } = useSelector((state) => state.conversation.direct_chat)
 
   useEffect(() => {
     socket.emit('get_direct_messages', { user_id }, (response) => {
@@ -75,19 +76,27 @@ const ChatsList = () => {
             <SimpleBarStyle timeout={500} clickOnTrack={false}>
               <Stack spacing={2.4}>
                 <Typography variant='subtitle2' sx={{ color: '#676667' }}>
+                  Your AI Assistant
+                </Typography>
+                {/* Todo: Add AI Assistant chat element */}
+                <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                   Pinned
                 </Typography>
                 {/* <ChatElement /> */}
-                {ChatList.filter((ele) => ele.pinned).map((ele) => {
-                  return <ChatElement {...ele} chat_type={'individual'} key={`chat-${ele.id}`} />
-                })}
+                {conversations
+                  .filter((ele) => ele.pinned)
+                  .map((ele, idx) => {
+                    return <ChatElement {...ele} chat_type={'individual'} key={`chat-${idx}`} />
+                  })}
                 <Typography variant='subtitle2' sx={{ color: '#676667' }}>
                   All Chats
                 </Typography>
                 {/* <ChatElement /> */}
-                {ChatList.filter((ele) => !ele.pinned).map((ele) => {
-                  return <ChatElement {...ele} chat_type={'individual'} key={`chat2-${ele.id}`} />
-                })}
+                {conversations
+                  .filter((ele) => !ele.pinned)
+                  .map((ele, idx) => {
+                    return <ChatElement {...ele} chat_type={'individual'} key={`chat2-${idx}`} />
+                  })}
               </Stack>
             </SimpleBarStyle>
           </Stack>
