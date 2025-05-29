@@ -1,8 +1,9 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { OpenSnackBar } from '../../redux/slices/app'
+import { OpenSnackBar, SelectConversation } from '../../redux/slices/app'
 import { getSocket } from '../../socket'
 import { useSelector } from 'react-redux'
+import { AddDirectConversation, UpdateDirectConversation } from '../../redux/slices/conversation'
 
 const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
   const dispatch = useDispatch()
@@ -50,7 +51,7 @@ const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
 
     // TODO: audio/video notifications
     // TODO: new message
-    // start chat -- add new conversation to the chat list or open the existing one
+    // start one-to-one chat -- add new conversation to the chat list or open the existing one
     socket.on('start_chat', (data) => {
       console.log('Start chat:', data)
 
@@ -59,13 +60,16 @@ const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
       if (exsitingConversation) {
         console.log('Conversation already exists:', exsitingConversation)
 
-        // TODO: dispatch -- update the current conversation
+        // dispatch -- update the current conversation
+        dispatch(UpdateDirectConversation({ thisConversation: data, user_id }))
       } else {
         console.log('New conversation:', data)
-        // TODO: dispatch -- add new conversation to the chat list
+        // dispatch -- add new conversation to the chat list
+        dispatch(AddDirectConversation({ thisConversation: data, user_id }))
       }
 
-      // TODO: dispatch -- select the current conversation
+      // dispatch -- the (existing) specific conversation
+      dispatch(SelectConversation({ room_id: data?._id, chat_type: 'direct' }))
     })
 
     return () => {
@@ -74,7 +78,7 @@ const useDashboardSocketHandlers = ({ user_id, isLoggedIn }) => {
       socket?.off('friend_request_sent')
       socket?.off('start_chat')
     }
-  }, [isLoggedIn, dispatch, user_id])
+  }, [isLoggedIn, dispatch, user_id, conversations])
 }
 
 export default useDashboardSocketHandlers
