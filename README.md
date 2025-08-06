@@ -1,6 +1,25 @@
 # A-realtime-chat-app-with-ChatGPT-API
+## Outline
+- [Summary](https://github.com/KunyueXing/realtime-chat-app/edit/main/README.md#summary)
+- [Features](https://github.com/KunyueXing/realtime-chat-app/edit/main/README.md#features)
+- Tech Stack / Major Dependencies
+- Project Structure
+- Integration with Backend
+- Installation & Setup
+- Testing
+- Screenshots
+- Deployment Instructions
+- Known Issues / Limitations
+- Roadmap / Features Under Development
+- Acknowledgements
+  
+---
+### Summary
+This is the frontend of a real-time chat application using React, Redux, Socket.IO, and Material UI. It connects to a Node.js backend via REST and WebSocket APIs.
 
-## Requirements
+---
+
+### Features
 1. **User Authentication and Management**
    - Users can register for an account with email and password.
    - Users receive a verification email and must verify their email before accessing full features.
