@@ -25,7 +25,7 @@ function useLocales() {
   // Switches the app’s languag and adjust the app's text direction based on the selected language.
   const handleChangeLanguage = (newLang) => {
     i18n.changeLanguage(newLang)
-    onChangeDirectionByLang(newlang)
+    onChangeDirectionByLang(newLang)
   }
 
   return {

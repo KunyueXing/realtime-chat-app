@@ -62,14 +62,14 @@ const GREY = {
   700: '#454F5B',
   800: '#212B36',
   900: '#161C24',
-  500_8: alpha('#919EAB', 0.08),
-  500_12: alpha('#919EAB', 0.12),
-  500_16: alpha('#919EAB', 0.16),
-  500_24: alpha('#919EAB', 0.24),
-  500_32: alpha('#919EAB', 0.32),
-  500_48: alpha('#919EAB', 0.48),
-  500_56: alpha('#919EAB', 0.56),
-  500_80: alpha('#919EAB', 0.8)
+  '500_8': alpha('#919EAB', 0.08),
+  '500_12': alpha('#919EAB', 0.12),
+  '500_16': alpha('#919EAB', 0.16),
+  '500_24': alpha('#919EAB', 0.24),
+  '500_32': alpha('#919EAB', 0.32),
+  '500_48': alpha('#919EAB', 0.48),
+  '500_56': alpha('#919EAB', 0.56),
+  '500_80': alpha('#919EAB', 0.8)
 }
 
 const CHART_COLORS = {
@@ -99,13 +99,13 @@ const COMMON = {
   grey: GREY,
   gradients: GRADIENTS,
   chart: CHART_COLORS,
-  divider: GREY[500_24],
+  divider: GREY['500_24'],
   action: {
-    hover: GREY[500_8],
-    selected: GREY[500_16],
-    disabled: GREY[500_80],
-    disabledBackground: GREY[500_24],
-    focus: GREY[500_24],
+    hover: GREY['500_8'],
+    selected: GREY['500_16'],
+    disabled: GREY['500_80'],
+    disabledBackground: GREY['500_24'],
+    focus: GREY['500_24'],
     hoverOpacity: 0.08,
     disabledOpacity: 0.48
   }
@@ -124,7 +124,7 @@ const palette = {
     ...COMMON,
     mode: 'dark',
     text: { primary: '#fff', secondary: GREY[500], disabled: GREY[600] },
-    background: { paper: GREY[800], default: GREY[900], neutral: GREY[500_16] },
+    background: { paper: GREY[800], default: GREY[900], neutral: GREY['500_16'] },
     action: { active: GREY[500], ...COMMON.action }
   }
 }
