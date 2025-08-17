@@ -15,8 +15,6 @@ const initialState = {
   },
   users: [], // all users of app who are not friends and not requested yet
   all_users: [],
-  friends: [], // all friends
-  friendRequests: [], // all friend requests
   chat_type: null, // can be individual or group
   room_id: null, // room id of the chat
   call_logs: []

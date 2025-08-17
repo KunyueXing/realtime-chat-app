@@ -5,6 +5,8 @@ import { Avatar, Button, IconButton, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { Chat } from 'phosphor-react'
 import { getSocket } from '../socket'
+import { useDispatch } from 'react-redux'
+import { SendFriendRequest } from '../redux/slices/friend'
 
 const user_id = window.localStorage.getItem('user_id')
 console.log('components/userelement user_id:', user_id)
@@ -14,6 +16,12 @@ console.log('components/userelement socket:', socket)
 const UserElement = ({ firstName, lastName, online, _id, img }) => {
   const theme = useTheme()
   const name = `${firstName} ${lastName}`
+  const dispatch = useDispatch()
+
+  const handleSendFriendRequest = () => {
+    console.log('User element: send friend request', _id)
+    dispatch(SendFriendRequest({ receiverId: _id }))
+  }
 
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
@@ -39,12 +47,15 @@ const UserElement = ({ firstName, lastName, online, _id, img }) => {
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
           <Button
-            onClick={() => {
-              console.log('Emitting friend_request event', { sender: user_id, receiver: _id })
-              socket.emit('friend_request', { sender: user_id, receiver: _id }, () => {
-                alert('Friend request sent')
-              })
-            }}
+            onClick={
+              //   () => {
+              //   console.log('Emitting friend_request event', { sender: user_id, receiver: _id })
+              //   socket.emit('friend_request', { sender: user_id, receiver: _id }, () => {
+              //     alert('Friend request sent')
+              //   })
+              // }
+              handleSendFriendRequest
+            }
           >
             Send Request
           </Button>
