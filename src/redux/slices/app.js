@@ -13,7 +13,6 @@ const initialState = {
     severity: null,
     message: null
   },
-  users: [], // all users of app who are not friends and not requested yet
   all_users: [],
   chat_type: null, // can be individual or group
   room_id: null, // room id of the chat
@@ -53,15 +52,6 @@ const slice = createSlice({
       state.snackbar.open = false
       state.snackbar.severity = null
       state.snackbar.message = null
-    },
-    updateUsers(state, action) {
-      state.users = action.payload.users
-    },
-    updateFriends(state, action) {
-      state.friends = action.payload.friends
-    },
-    updateFriendRequests(state, action) {
-      state.friendRequests = action.payload.friendRequests
     },
     selectConversation(state, action) {
       state.chat_type = action.payload.chat_type
@@ -104,66 +94,6 @@ export function OpenSnackBar({ severity, message }) {
 export function CloseSnackBar() {
   return async (dispatch, getState) => {
     dispatch(slice.actions.closeSnackBar())
-  }
-}
-
-export function FetchUsers(users) {
-  return async (dispatch, getState) => {
-    await axios
-      .get('/user/get-users', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getState().auth.token}`
-        }
-      })
-      .then((response) => {
-        console.log('response:', response)
-        dispatch(slice.actions.updateUsers({ users: response.data.users }))
-      })
-      .catch((error) => {
-        console.log('error:', error)
-        dispatch(slice.actions.openSnackBar({ severity: 'error', message: 'Error fetching users' }))
-      })
-  }
-}
-
-export function FetchFriends() {
-  return async (dispatch, getState) => {
-    await axios
-      .get('/user/get-friends', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getState().auth.token}`
-        }
-      })
-      .then((response) => {
-        console.log('response:', response)
-        dispatch(slice.actions.updateFriends({ friends: response.data.users }))
-      })
-      .catch((error) => {
-        console.log('error:', error)
-        dispatch(slice.actions.openSnackBar({ severity: 'error', message: 'Error fetching friends' }))
-      })
-  }
-}
-
-export function FetchFriendRequests() {
-  return async (dispatch, getState) => {
-    await axios
-      .get('/user/get-friend-requests', {
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${getState().auth.token}`
-        }
-      })
-      .then((response) => {
-        console.log('response:', response)
-        dispatch(slice.actions.updateFriendRequests({ friendRequests: response.data.users }))
-      })
-      .catch((error) => {
-        console.log('error:', error)
-        dispatch(slice.actions.openSnackBar({ severity: 'error', message: 'Error fetching friend requests' }))
-      })
   }
 }
 

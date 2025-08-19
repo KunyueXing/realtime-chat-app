@@ -2,8 +2,8 @@ import { Dialog, DialogContent, Slide, Tab, Tabs, Stack } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import { FetchFriendRequests, FetchFriends, FetchUsers } from '../../redux/slices/app'
 import { UserElement, FriendElement, FriendRequestElement } from '../../components/UserElement'
+import { FetchFriendRequests, FetchNonFriendUsers, FetchFriends } from '../../redux/slices/friend'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
@@ -11,10 +11,13 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 const UserList = () => {
   const dispatch = useDispatch()
-  const { users } = useSelector((state) => state.app)
+
+  // Connect to Redux state - this will cause re-render when state changes
+  const { users } = useSelector((state) => state.friend)
 
   useEffect(() => {
-    dispatch(FetchUsers())
+    // Fetch friend requests when component mounts
+    dispatch(FetchNonFriendUsers())
   }, [dispatch])
 
   return (
@@ -30,7 +33,7 @@ const UserList = () => {
 
 const FriendList = () => {
   const dispatch = useDispatch()
-  const { friends } = useSelector((state) => state.app)
+  const { friends } = useSelector((state) => state.friend)
 
   useEffect(() => {
     dispatch(FetchFriends())
@@ -48,7 +51,7 @@ const FriendList = () => {
 
 const FriendRequest = () => {
   const dispatch = useDispatch()
-  const { friendRequests } = useSelector((state) => state.app)
+  const { friendRequests } = useSelector((state) => state.friend)
 
   useEffect(() => {
     dispatch(FetchFriendRequests())

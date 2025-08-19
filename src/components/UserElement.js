@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Chat } from 'phosphor-react'
 import { getSocket } from '../socket'
 import { useDispatch } from 'react-redux'
-import { SendFriendRequest } from '../redux/slices/friend'
+import { SendFriendRequest, AcceptFriendRequest } from '../redux/slices/friend'
 
 const user_id = window.localStorage.getItem('user_id')
 console.log('components/userelement user_id:', user_id)
@@ -126,6 +126,13 @@ const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
   const theme = useTheme()
   const name = `${firstName} ${lastName}`
 
+  const dispatch = useDispatch()
+
+  const handleAcceptFriendRequest = () => {
+    console.log('Friend element: accept friend request', id)
+    dispatch(AcceptFriendRequest({ requestId: id }))
+  }
+
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
       <Stack direction='row' alignItems={'center'} justifyContent={'space-between'}>
@@ -149,13 +156,7 @@ const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
           </Stack>
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
-          <Button
-            onClick={() => {
-              socket.emit('accept_friend_request', { request_id: id })
-            }}
-          >
-            Accept
-          </Button>
+          <Button onClick={handleAcceptFriendRequest}>Accept</Button>
           <Button
             onClick={() => {
               socket.emit('reject_friend_request', { request_id: id })

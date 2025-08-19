@@ -64,7 +64,7 @@ const Chat_Footer = [
 
 const ChatList = [
   {
-    id: 0,
+    id: '0',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -74,7 +74,7 @@ const ChatList = [
     online: true
   },
   {
-    id: 1,
+    id: '1',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -84,7 +84,7 @@ const ChatList = [
     online: false
   },
   {
-    id: 2,
+    id: '2',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -94,7 +94,7 @@ const ChatList = [
     online: true
   },
   {
-    id: 3,
+    id: '3',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -104,7 +104,7 @@ const ChatList = [
     online: true
   },
   {
-    id: 4,
+    id: '4',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -114,7 +114,7 @@ const ChatList = [
     online: false
   },
   {
-    id: 5,
+    id: '5',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -124,7 +124,7 @@ const ChatList = [
     online: false
   },
   {
-    id: 6,
+    id: '6',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
@@ -134,7 +134,7 @@ const ChatList = [
     online: false
   },
   {
-    id: 7,
+    id: '7',
     img: faker.image.avatar(),
     name: faker.person.firstName(),
     msg: faker.music.songName(),
