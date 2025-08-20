@@ -6,7 +6,7 @@ import PropTypes from 'prop-types'
 import { Chat } from 'phosphor-react'
 import { getSocket } from '../socket'
 import { useDispatch } from 'react-redux'
-import { SendFriendRequest, AcceptFriendRequest } from '../redux/slices/friend'
+import { SendFriendRequest, AcceptFriendRequest, RejectFriendRequest } from '../redux/slices/friend'
 
 const user_id = window.localStorage.getItem('user_id')
 console.log('components/userelement user_id:', user_id)
@@ -46,19 +46,7 @@ const UserElement = ({ firstName, lastName, online, _id, img }) => {
           </Stack>
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
-          <Button
-            onClick={
-              //   () => {
-              //   console.log('Emitting friend_request event', { sender: user_id, receiver: _id })
-              //   socket.emit('friend_request', { sender: user_id, receiver: _id }, () => {
-              //     alert('Friend request sent')
-              //   })
-              // }
-              handleSendFriendRequest
-            }
-          >
-            Send Request
-          </Button>
+          <Button onClick={handleSendFriendRequest}>Send Request</Button>
         </Stack>
       </Stack>
     </StyledChatBox>
@@ -133,6 +121,11 @@ const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
     dispatch(AcceptFriendRequest({ requestId: id }))
   }
 
+  const handleRejectFriendRequest = () => {
+    console.log('Friend element: reject friend request', id)
+    dispatch(RejectFriendRequest({ requestId: id }))
+  }
+
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
       <Stack direction='row' alignItems={'center'} justifyContent={'space-between'}>
@@ -157,13 +150,7 @@ const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
           <Button onClick={handleAcceptFriendRequest}>Accept</Button>
-          <Button
-            onClick={() => {
-              socket.emit('reject_friend_request', { request_id: id })
-            }}
-          >
-            Reject
-          </Button>
+          <Button onClick={handleRejectFriendRequest}>Reject</Button>
         </Stack>
       </Stack>
     </StyledChatBox>

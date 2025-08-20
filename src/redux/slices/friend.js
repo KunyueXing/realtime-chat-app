@@ -35,6 +35,10 @@ const friendSlice = createSlice({
     },
     updateUsers(state, action) {
       state.users = action.payload.users
+    },
+    removeFriendRequest: (state, action) => {
+      // Remove the request from friendRequests
+      state.friendRequests = state.friendRequests.filter((request) => request._id !== action.payload.requestId)
     }
   }
 })
@@ -186,6 +190,7 @@ export function AcceptFriendRequest({ requestId }) {
       if (response.status === 200) {
         console.log('Friend request accepted:', response.data)
         const { requestSender } = response.data
+        // Optimistic UI update: added new friend and removed request
         dispatch(friendSlice.actions.addNewFriend({ friend: requestSender, requestId }))
         dispatch(OpenSnackBar({ severity: 'success', message: 'Friend request accepted' }))
 
@@ -208,6 +213,43 @@ export function AcceptFriendRequest({ requestId }) {
     } catch (error) {
       console.error('Error accepting friend request:', error)
       dispatch(OpenSnackBar({ severity: 'error', message: 'Error accepting friend request' }))
+    }
+  }
+}
+
+export function RejectFriendRequest({ requestId }) {
+  return async (dispatch, getState) => {
+    const state = getState()
+    const userId = state.auth.user_id
+    const socket = getSocket(userId)
+
+    if (!socket || !socket.connected) {
+      console.error('Socket not initialized or not connected')
+      dispatch(OpenSnackBar({ severity: 'error', message: 'Socket not connected' }))
+      return
+    }
+
+    try {
+      const response = await axios.post(
+        `/friends/requests/${requestId}/reject`,
+        { requestId, userId },
+        {
+          headers: {
+            'Content-Type': 'application/json',
+            Authorization: `Bearer ${state.auth.token}`
+          }
+        }
+      )
+
+      if (response.status === 200) {
+        console.log('Friend request rejected:', requestId)
+        dispatch(friendSlice.actions.removeFriendRequest({ requestId }))
+        // Only notify the user who received the request. So don't need to use socket.emit here to notify the sender
+        dispatch(OpenSnackBar({ severity: 'success', message: 'Friend request rejected' }))
+      }
+    } catch (error) {
+      console.error('Error rejecting friend request:', error)
+      dispatch(OpenSnackBar({ severity: 'error', message: 'Error rejecting friend request' }))
     }
   }
 }
