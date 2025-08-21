@@ -1,9 +1,10 @@
 import { useEffect, useState, useRef, useCallback } from 'react'
 import { getSocket } from '../../socket'
+import { set } from 'react-hook-form'
 
 export const useSocket = ({ userId, isLoggedIn }) => {
   const socketRef = useRef(null)
-  const [isconnected, setConnected] = useState(false)
+  const [isConnected, setConnected] = useState(false)
   const [connectionError, setConnectionError] = useState(null)
   const reconnectTimeoutRef = useRef(null)
   const reconnectAttemptsRef = useRef(0)
@@ -26,13 +27,6 @@ export const useSocket = ({ userId, isLoggedIn }) => {
     reconnectAttemptsRef.current = 0 // Reset reconnect attempts
     setConnectionError(null) // Reset connection error
   }, [])
-
-  const connectSocket = useCallback(() => {
-    if (isLoggedIn && userId) {
-      const newSocket = getSocket(userId)
-      socketRef.current = newSocket
-    }
-  }, [userId, isLoggedIn])
 
   useEffect(() => {
     if (!isLoggedIn || !userId) {
@@ -98,4 +92,29 @@ export const useSocket = ({ userId, isLoggedIn }) => {
     // Cleanup on unmount or when dependencies change
     return cleanup
   }, [isLoggedIn, userId, cleanup])
+
+  const disconnect = useCallback(() => {
+    if (socketRef.current) {
+      socketRef.current.disconnect()
+      cleanup()
+    }
+  }, [cleanup])
+
+  const reconnect = useCallback(() => {
+    if (socketRef.current && !isConnected && reconnectAttemptsRef.current < maxRecconectAttempts) {
+      socketRef.current.connect()
+      reconnectAttemptsRef.current = 0 // Reset attempts on manual reconnect
+      setConnectionError(null) // Reset connection error
+      setConnected(true) // Set connected state to true
+    }
+  }, [isConnected])
+
+  return {
+    socketRef,
+    isConnected,
+    connectionError,
+    disconnect,
+    reconnect,
+    cleanup
+  }
 }
