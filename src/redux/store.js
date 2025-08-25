@@ -2,6 +2,7 @@ import { useDispatch as useAppDispatch, useSelector as useAppSelector } from 're
 import { configureStore } from '@reduxjs/toolkit'
 import { persistStore, persistReducer } from 'redux-persist'
 import { rootPersistConfig, rootReducer } from './rootReducer'
+import { apiClient, API_ENDPOINTS } from '../utils/api'
 
 /*
   For a simplified store configuration. Used built-in middleware. 
@@ -31,6 +32,61 @@ const store = configureStore({
       immutableCheck: false
     })
 })
+
+apiClient.interceptors.request.use(
+  (config) => {
+    const state = store.getState()
+    const token = state.auth.token
+
+    if (token) {
+      config.headers.Authorization = `Bearer ${token}`
+    }
+    return config
+  },
+  (error) => {
+    console.error('Request interceptor Error:', error)
+    return Promise.reject(error)
+  }
+)
+
+apiClient.interceptors.response.use(
+  (response) => response,
+  async (error) => {
+    // If we receive a 401 Unauthorized response, it likely means the token has expired or is invalid
+    if (error.response?.status === 401) {
+      const isLoggedIn = store.getState().auth.isLoggedIn
+
+      if (isLoggedIn) {
+        console.log('Unauthorized! Logging out...')
+        // Dispatch actions directly so don't need to import the slices
+        store.dispatch({ type: 'auth/Logout' })
+        store.dispatch({ type: 'app/ResetApp' })
+
+        // Clear local storage
+        window.localStorage.removeItem('user_id')
+
+        store.dispatch({
+          type: 'app/OpenSnackBar',
+          payload: { severity: 'error', message: 'Session expired. Please log in again.' }
+        })
+
+        setTimeout(() => {
+          window.location.href = API_ENDPOINTS.AUTH.LOGIN // Redirect to login page
+        }, 1000)
+      }
+    }
+
+    if (error.response?.status === 403) {
+      console.error('Forbidden: You do not have permission to access this resource.')
+      store.dispatch({
+        type: 'app/OpenSnackBar',
+        payload: { severity: 'error', message: 'You do not have permission to access this resource.' }
+      })
+    }
+
+    return Promise.reject(error)
+  }
+)
 
 // Responsible for persisting the store’s state to the configured storage (such as local storage) and rehydrating it
 // when the app reloads.

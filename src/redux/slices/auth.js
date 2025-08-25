@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit'
-import axios from '../../utils/axios'
 import { OpenSnackBar, ResetApp } from './app'
 import { disconnectSocket } from '../../socket'
+import { apiClient, API_ENDPOINTS } from '../../utils/api'
 
 const initialState = {
   isLoggedIn: false,
@@ -47,8 +47,8 @@ export function LoginUser(formValues, navigate) {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
     //API call
-    await axios
-      .post('/auth/login', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+    await apiClient
+      .post(API_ENDPOINTS.AUTH.LOGIN, { ...formValues })
       .then(function (response) {
         console.log('login response: ', response)
         // Check if the response is successful
@@ -94,8 +94,8 @@ export function ForgotPassword(formValues) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
-    await axios
-      .post('/auth/forgotPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+    await apiClient
+      .post(API_ENDPOINTS.AUTH.FORGOT_PASSWORD, { ...formValues })
       .then(function (response) {
         console.log('forgot password response: ', response)
         // Check if the response is successful
@@ -117,8 +117,8 @@ export function NewPassword(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
-    await axios
-      .patch('/auth/resetPassword', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+    await apiClient
+      .patch(API_ENDPOINTS.AUTH.RESET_PASSWORD, { ...formValues })
       .then(function (response) {
         console.log('reset password response: ', response)
         // Check if the response is successful
@@ -148,8 +148,8 @@ export function RegisterUser(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
-    await axios
-      .post('/auth/register', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+    await apiClient
+      .post(API_ENDPOINTS.AUTH.REGISTER, { ...formValues })
       .then(function (response) {
         console.log('register response: ', response)
         // Check if the response is successful
@@ -180,8 +180,8 @@ export function VerifyUser(formValues, navigate) {
   return async (dispatch, getState) => {
     dispatch(authSlice.actions.updateIsLoading({ isLoading: true, error: false }))
 
-    await axios
-      .post('/auth/verify', { ...formValues }, { headers: { 'content-type': 'application/json' } })
+    await apiClient
+      .post(API_ENDPOINTS.AUTH.VERIFY, { ...formValues })
       .then(function (response) {
         console.log('verify response: ', response)
         // Check if the response is successful
