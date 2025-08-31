@@ -4,23 +4,22 @@ import { useTheme } from '@mui/material/styles'
 import { Avatar, Button, IconButton, Stack, Typography } from '@mui/material'
 import PropTypes from 'prop-types'
 import { Chat } from 'phosphor-react'
-import { getSocket } from '../socket'
-import { useDispatch } from 'react-redux'
-import { SendFriendRequest, AcceptFriendRequest, RejectFriendRequest } from '../redux/slices/friend'
-
-const user_id = window.localStorage.getItem('user_id')
-console.log('components/userelement user_id:', user_id)
-const socket = getSocket(user_id)
-console.log('components/userelement socket:', socket)
+import { useFriends } from '../hooks/socket/useFriend'
+import { useSocket } from '../contexts/SocketContext'
 
 const UserElement = ({ firstName, lastName, online, _id, img }) => {
   const theme = useTheme()
   const name = `${firstName} ${lastName}`
-  const dispatch = useDispatch()
+  const { sendFriendRequest } = useFriends()
 
-  const handleSendFriendRequest = () => {
+  const handleSendFriendRequest = async () => {
     console.log('User element: send friend request', _id)
-    dispatch(SendFriendRequest({ receiverId: _id }))
+    // dispatch(SendFriendRequest({ receiverId: _id }))
+    try {
+      await sendFriendRequest(_id)
+    } catch (error) {
+      console.error('Failed to send friend request:', error)
+    }
   }
 
   return (
@@ -64,6 +63,10 @@ UserElement.propTypes = {
 const FriendElement = ({ img, firstName, lastName, online, _id }) => {
   const theme = useTheme()
   const name = `${firstName} ${lastName}`
+  const { emit, isConnected } = useSocket()
+
+  // TODO: handlestartchat function
+  const handleStartChat = async () => {}
 
   return (
     <StyledChatBox sx={{ width: '100%', backgroundColor: theme.palette.background.paper, borderRadius: 1 }} p={2}>
@@ -89,11 +92,7 @@ const FriendElement = ({ img, firstName, lastName, online, _id }) => {
         </Stack>
         <Stack direction='row' spacing={2} sx={{ alignItems: 'center' }}>
           {/* TODO: add start chat functionality using socket */}
-          <IconButton
-            onClick={() => {
-              socket.emit('start_conversation', { sender: user_id, receiver: _id })
-            }}
-          >
+          <IconButton onClick={handleStartChat} disabled={!isConnected}>
             <Chat />
           </IconButton>
         </Stack>
@@ -113,17 +112,26 @@ FriendElement.propTypes = {
 const FriendRequestElement = ({ img, firstName, lastName, online, id }) => {
   const theme = useTheme()
   const name = `${firstName} ${lastName}`
+  const { acceptFriendRequest, rejectFriendRequest } = useFriends()
 
-  const dispatch = useDispatch()
-
-  const handleAcceptFriendRequest = () => {
+  const handleAcceptFriendRequest = async () => {
     console.log('Friend element: accept friend request', id)
-    dispatch(AcceptFriendRequest({ requestId: id }))
+    // dispatch(AcceptFriendRequest({ requestId: id }))
+    try {
+      await acceptFriendRequest(id)
+    } catch (error) {
+      console.error('Failed to accept friend request:', error)
+    }
   }
 
-  const handleRejectFriendRequest = () => {
+  const handleRejectFriendRequest = async () => {
     console.log('Friend element: reject friend request', id)
-    dispatch(RejectFriendRequest({ requestId: id }))
+    // dispatch(RejectFriendRequest({ requestId: id }))
+    try {
+      await rejectFriendRequest(id)
+    } catch (error) {
+      console.error('Failed to reject friend request:', error)
+    }
   }
 
   return (

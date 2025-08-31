@@ -1,67 +1,95 @@
 import { Dialog, DialogContent, Slide, Tab, Tabs, Stack } from '@mui/material'
 import React, { useState, useEffect } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
 import { UserElement, FriendElement, FriendRequestElement } from '../../components/UserElement'
-import { FetchFriendRequests, FetchNonFriendUsers, FetchFriends } from '../../redux/slices/friend'
+import { useFriends } from '../../hooks/socket/useFriend'
 
 const Transition = React.forwardRef(function Transition(props, ref) {
   return <Slide direction='up' ref={ref} {...props} />
 })
 
 const UserList = () => {
-  const dispatch = useDispatch()
+  // const dispatch = useDispatch()
 
-  // Connect to Redux state - this will cause re-render when state changes
-  const { users } = useSelector((state) => state.friend)
+  // // Connect to Redux state - this will cause re-render when state changes
+  // const { users } = useSelector((state) => state.friend)
 
+  // useEffect(() => {
+  //   // Fetch friend requests when component mounts
+  //   dispatch(FetchNonFriendUsers())
+  // }, [dispatch])
+
+  const { users, loadUsers, loading } = useFriends()
   useEffect(() => {
-    // Fetch friend requests when component mounts
-    dispatch(FetchNonFriendUsers())
-  }, [dispatch])
+    loadUsers()
+  }, [loadUsers])
+
+  if (loading.fetchUsers) {
+    return <div>Loading users...</div>
+  }
 
   return (
     <>
       {Array.isArray(users) &&
         users.map((el, idx) => {
           // console.log('el:', el)
-          return <UserElement key={idx} {...el} />
+          return <UserElement key={el._id} {...el} />
         })}
     </>
   )
 }
 
 const FriendList = () => {
-  const dispatch = useDispatch()
-  const { friends } = useSelector((state) => state.friend)
+  // const dispatch = useDispatch()
+  // const { friends } = useSelector((state) => state.friend)
+
+  // useEffect(() => {
+  //   dispatch(FetchFriends())
+  // }, [dispatch])
+
+  const { friends, loadFriends, loading } = useFriends()
 
   useEffect(() => {
-    dispatch(FetchFriends())
-  }, [dispatch])
+    loadFriends()
+  }, [loadFriends])
+
+  if (loading.fetchFriends) {
+    return <div>Loading friends...</div>
+  }
 
   return (
     <>
       {Array.isArray(friends) &&
         friends.map((el, idx) => {
-          return <FriendElement key={idx} {...el} />
+          return <FriendElement key={el._id} {...el} />
         })}
     </>
   )
 }
 
 const FriendRequest = () => {
-  const dispatch = useDispatch()
-  const { friendRequests } = useSelector((state) => state.friend)
+  // const dispatch = useDispatch()
+  // const { friendRequests } = useSelector((state) => state.friend)
+
+  // useEffect(() => {
+  //   dispatch(FetchFriendRequests())
+  // }, [dispatch])
+
+  const { friendRequests, loadFriendRequests, loading } = useFriends()
 
   useEffect(() => {
-    dispatch(FetchFriendRequests())
-  }, [dispatch])
+    loadFriendRequests()
+  }, [loadFriendRequests])
+
+  if (loading.fetchFriendRequests) {
+    return <div>Loading requests...</div>
+  }
 
   return (
     <>
       {Array.isArray(friendRequests) &&
         friendRequests.map((el, idx) => {
-          return <FriendRequestElement key={idx} {...el.sender} id={el._id} />
+          return <FriendRequestElement key={el._id} {...el.sender} id={el._id} />
         })}
     </>
   )
