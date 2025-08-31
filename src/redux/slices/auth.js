@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
 import { OpenSnackBar, ResetApp } from './app'
-import { disconnectSocket } from '../../socket'
 import { apiClient, API_ENDPOINTS } from '../../utils/api'
 
 const initialState = {
@@ -78,10 +77,9 @@ export function LoginUser(formValues, navigate) {
 }
 export function LogoutUser() {
   return async (dispatch, getState) => {
-    // Disconnect the socket
-    disconnectSocket()
-
     window.localStorage.removeItem('user_id')
+
+    // Update Redux state - this will trigger SocketContext to cleanup automatically
     dispatch(authSlice.actions.logout())
     dispatch(ResetApp())
     console.log('logout')
