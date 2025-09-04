@@ -1,6 +1,6 @@
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit'
 import { OpenSnackBar } from './app'
-import { apiClient, API_ENDPOINTS } from '../../utils/api'
+import { API_ENDPOINTS, apiMethods } from '../../utils/api'
 
 // Entity adapters for normalized state management - useful for large lists, gives O(1) access by ID
 const friendsAdapter = createEntityAdapter({
@@ -235,7 +235,7 @@ const _fetchFriends = async (dispatch, signal) => {
   dispatch(setError({ type: 'fetchFriends', error: null }))
 
   try {
-    const response = await apiClient.get(API_ENDPOINTS.FRIEND.GET_ALL_FRIENDS, { signal })
+    const response = await apiMethods.get(API_ENDPOINTS.FRIEND.GET_ALL_FRIENDS, { signal })
 
     console.log('fetch friends response:', response.data)
     const friends = response.data.users || []
@@ -264,7 +264,7 @@ const _fetchFriendRequests = async (dispatch, signal) => {
   dispatch(setError({ type: 'requests', error: null }))
 
   try {
-    const response = await apiClient.get(API_ENDPOINTS.FRIEND.FRIEND_REQUEST, {
+    const response = await apiMethods.get(API_ENDPOINTS.FRIEND.FRIEND_REQUEST, {
       signal
     })
 
@@ -295,7 +295,7 @@ const _fetchNonFriendUsers = async (dispatch, signal) => {
   dispatch(setError({ type: 'fetchUsers', error: null }))
 
   try {
-    const response = await apiClient.get(API_ENDPOINTS.USER.NON_FRIENDS, { signal })
+    const response = await apiMethods.get(API_ENDPOINTS.USER.NON_FRIENDS, { signal })
     console.log('fetch non-friend users response:', response.data)
     const users = response.data.users || []
     dispatch(setUsers({ users }))
@@ -337,7 +337,7 @@ export const sendFriendRequestHTTP =
     }
 
     try {
-      const response = await apiClient.post(API_ENDPOINTS.FRIEND.FRIEND_REQUEST, { receiverId, senderId: userId })
+      const response = await apiMethods.post(API_ENDPOINTS.FRIEND.FRIEND_REQUEST, { receiverId, senderId: userId })
 
       console.log('send friend request response:', response.data)
       dispatch(setLoading({ type: 'sendingRequest', loading: false }))
@@ -346,7 +346,7 @@ export const sendFriendRequestHTTP =
       return {
         success: true,
         data: {
-          ...response.data,
+          friendRequest: response.data.friendRequest,
           senderId: userId,
           receiverId
         }
@@ -379,8 +379,11 @@ export const acceptFriendRequestHTTP =
     dispatch(setLoading({ type: 'acceptingFriendRequest', loading: true }))
 
     try {
-      const response = await apiClient.post(API_ENDPOINTS.FRIEND.ACCEPT_REQUEST(requestId), { requestId, userId })
+      const response = await apiMethods.post(API_ENDPOINTS.FRIEND.ACCEPT_REQUEST(requestId), { requestId, userId })
 
+      console.log('accept friend request response:', response)
+      console.log('requestSender:', response.data?.requestSender)
+      console.log('requestSender._id:', response.data?.requestSender?._id)
       console.log('accept friend request response:', response.data)
       const { requestSender } = response.data
 
@@ -392,8 +395,7 @@ export const acceptFriendRequestHTTP =
       return {
         success: true,
         data: {
-          ...response.data,
-          requestId,
+          sender: requestSender._id,
           acceptedBy: userId
         }
       }
@@ -414,7 +416,7 @@ export const rejectFriendRequestHTTP =
     dispatch(setLoading({ type: 'rejectingFriendRequest', loading: true }))
 
     try {
-      await apiClient.post(API_ENDPOINTS.FRIEND.REJECT_REQUEST(requestId), { requestId, userId })
+      await apiMethods.post(API_ENDPOINTS.FRIEND.REJECT_REQUEST(requestId), { requestId, userId })
       console.log('Friend request rejected:', requestId)
 
       // Remove from friend requests list

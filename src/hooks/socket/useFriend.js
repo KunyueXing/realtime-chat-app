@@ -119,8 +119,9 @@ export const useFriends = () => {
         if (result.success && isConnected) {
           try {
             await emit('accept_friend_request', {
-              requestId,
-              acceptedBy: result.data.acceptedBy
+              acceptedBy: result.data.acceptedBy,
+              // notifyUserId - sender of the friend request, acceptedBy - receiver of the friend request
+              notifyUserId: result.data.sender
             })
           } catch (socketError) {
             console.warn('Socket emit failed, but HTTP succeeded:', socketError)
