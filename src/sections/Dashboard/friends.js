@@ -9,16 +9,6 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 })
 
 const UserList = () => {
-  // const dispatch = useDispatch()
-
-  // // Connect to Redux state - this will cause re-render when state changes
-  // const { users } = useSelector((state) => state.friend)
-
-  // useEffect(() => {
-  //   // Fetch friend requests when component mounts
-  //   dispatch(FetchNonFriendUsers())
-  // }, [dispatch])
-
   const { users, loadUsers, loading } = useFriends()
   useEffect(() => {
     loadUsers()
@@ -40,13 +30,6 @@ const UserList = () => {
 }
 
 const FriendList = () => {
-  // const dispatch = useDispatch()
-  // const { friends } = useSelector((state) => state.friend)
-
-  // useEffect(() => {
-  //   dispatch(FetchFriends())
-  // }, [dispatch])
-
   const { friends, loadFriends, loading } = useFriends()
 
   useEffect(() => {
@@ -68,13 +51,6 @@ const FriendList = () => {
 }
 
 const FriendRequest = () => {
-  // const dispatch = useDispatch()
-  // const { friendRequests } = useSelector((state) => state.friend)
-
-  // useEffect(() => {
-  //   dispatch(FetchFriendRequests())
-  // }, [dispatch])
-
   const { friendRequests, loadFriendRequests, loading } = useFriends()
 
   useEffect(() => {
