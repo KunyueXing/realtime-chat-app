@@ -122,26 +122,26 @@ apiClient.interceptors.response.use(
 export const API_ENDPOINTS = {
   // Auth endpoints
   AUTH: {
-    LOGIN: '/auth/login',
-    REGISTER: '/auth/register',
-    LOGOUT: '/auth/logout',
-    VERIFY: '/auth/verify',
-    FORGOT_PASSWORD: '/auth/forgot-password',
-    RESET_PASSWORD: '/auth/reset-password'
+    LOGIN: '/api/v1/auth/login',
+    REGISTER: '/api/v1/auth/register',
+    LOGOUT: '/api/v1/auth/logout',
+    VERIFY: '/api/v1/auth/verify',
+    FORGOT_PASSWORD: '/api/v1/auth/forgot-password',
+    RESET_PASSWORD: '/api/v1/auth/reset-password'
   },
   // User endpoints
   USER: {
     PROFILE: (userId) => `/user/profile/${userId}`, // GET userId is optional, if not provided, get current user's profile. PATCH to update profile
     SEARCH_USER: '/user/search',
-    NON_FRIENDS: '/user/non-friends'
+    NON_FRIENDS: '/api/v1/user/non-friends'
   },
   // Friend endpoints
   FRIEND: {
-    GET_ALL_FRIENDS: '/friends',
-    FRIEND_REQUEST: '/friends/requests', // POST to send request, GET to fetch requests
-    ACCEPT_REQUEST: (requestId) => `/friends/requests/${requestId}/accept`,
-    REJECT_REQUEST: (requestId) => `/friends/requests/${requestId}/reject`,
-    REMOVE_FRIEND: (userId) => `/friends/${userId}` // DELETE
+    GET_ALL_FRIENDS: '/api/v1/friends',
+    FRIEND_REQUEST: '/api/v1/friends/requests', // POST to send request, GET to fetch requests
+    ACCEPT_REQUEST: (requestId) => `/api/v1/friends/requests/${requestId}/accept`,
+    REJECT_REQUEST: (requestId) => `/api/v1/friends/requests/${requestId}/reject`,
+    REMOVE_FRIEND: (userId) => `/api/v1/friends/${userId}` // DELETE
   },
   // Chat endpoints
   CHAT: {
