@@ -5,3 +5,6 @@
 /test-results.xml
 .temp-eslintcache
 /node_modules
+
+# Local AI assistant guidance
+CLAUDE.md
