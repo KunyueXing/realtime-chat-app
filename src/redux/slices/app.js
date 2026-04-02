@@ -13,8 +13,6 @@ const initialState = {
     message: null
   },
   all_users: [],
-  chat_type: null, // can be individual or group
-  room_id: null, // room id of the chat
   call_logs: []
 }
 
@@ -51,10 +49,6 @@ const slice = createSlice({
       state.snackbar.open = false
       state.snackbar.severity = null
       state.snackbar.message = null
-    },
-    selectConversation(state, action) {
-      state.chat_type = action.payload.chat_type
-      state.room_id = action.payload.room_id
     },
     resetApp: () => initialState
   }
@@ -93,12 +87,6 @@ export function OpenSnackBar({ severity, message }) {
 export function CloseSnackBar() {
   return async (dispatch, getState) => {
     dispatch(slice.actions.closeSnackBar())
-  }
-}
-
-export function SelectConversation({ chat_type, room_id }) {
-  return async (dispatch, getState) => {
-    dispatch(slice.actions.selectConversation({ chat_type, room_id }))
   }
 }
 
